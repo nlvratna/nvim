@@ -5,16 +5,26 @@ vim.g.maplocalleader = " "
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
-vim.keymap.set("n", "e", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 -- For conciseness
 local opts = { noremap = true, silent = true }
 
--- save file
+-- yank into "-" register
+vim.keymap.set({ "n", "v" }, "<leader>y", '"-yy', opts)
+-- delete to _ register
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_dd', opts)
+
+-- paste from - register
+vim.keymap.set({ "n", "v" }, "<leader>p", '"-p', opts)
+
+vim.keymap.set({ "n", "v" }, "<leader>e", '"-p', opts)
+
 vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", opts)
 -- save file without auto-formatting
 vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", opts)
 
 -- quit file
+vim.keymap.set("n", "<C-q>", "<cmd> q <CR>", opts)
 vim.keymap.set("n", "<C-q>", "<cmd> q <CR>", opts)
 
 -- delete single character without copying into register
@@ -74,5 +84,9 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
-vim.keymap.set("", "<Up>", "<Nop>", opts)
-vim.keymap.set("", "<Down>", "<Nop>", opts)
+-- Exit insert mode without hitting Esc
+vim.keymap.set("i", "jj", "<Esc><Esc>", { desc = "Esc" })
+
+--Oil
+
+vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
