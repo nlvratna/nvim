@@ -39,10 +39,10 @@ vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
 -- Resize with arrows
-vim.keymap.set("n", "<M-k>", ":resize -2<CR>", opts)
-vim.keymap.set("n", "<M-j>", ":resize +2<CR>", opts)
-vim.keymap.set("n", "<M-h>", ":vertical resize -2<CR>", opts)
-vim.keymap.set("n", "<M-l>", ":vertical resize +2<CR>", opts)
+vim.keymap.set("n", "<Up>", ":resize -2<CR>", opts)
+vim.keymap.set("n", "<Down>", ":resize +2<CR>", opts)
+vim.keymap.set("n", "<Left>", ":vertical resize -2<CR>", opts)
+vim.keymap.set("n", "<Right>", ":vertical resize +2<CR>", opts)
 
 -- Buffers
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)

@@ -92,7 +92,7 @@ return { -- Autocompletion
 				-- Accept ([y]es) the completion.
 				--  This will auto-import if your LSP supports it.
 				--  This will expand snippets if the LSP sent a snippet.
-				["<C-g>"] = cmp.mapping.confirm({ select = true }),
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 
 				-- If you prefer more traditional completion keymaps,
 				-- you can uncomment the following lines
@@ -123,28 +123,6 @@ return { -- Autocompletion
 						luasnip.jump(-1)
 					end
 				end, { "i", "s" }),
-
-				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-				-- Select next/previous item with Tab / Shift + Tab
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
-				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.locally_jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
 			}),
 			sources = {
 				{
@@ -173,3 +151,22 @@ return { -- Autocompletion
 		})
 	end,
 }
+
+-- return {
+-- 	{
+-- 		"saghen/blink.cmp",
+-- 		-- optional: provides snippets for the snippet source
+-- 		version = "*",
+-- 		dependencies = "rafamadriz/friendly-snippets",
+-- 		opts = {
+-- 			keymap = { preset = "default" },
+--
+-- 			appearance = {
+-- 				use_nvim_cmp_as_default = true,
+-- 				nerd_font_variant = "mono",
+-- 			},
+--
+-- 			-- signature = { enabled = true },
+-- 		},
+-- 	},
+-- }

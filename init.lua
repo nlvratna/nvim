@@ -1,16 +1,31 @@
-require 'leela.core'
-require 'leela.lazy'
-if vim.fn.has 'wsl' == 1 then
-  vim.g.clipboard = {
-    name = 'win32yank-wsl',
-    copy = {
-      ['+'] = 'win32yank.exe -i --crlf',
-      ['*'] = 'win32yank.exe -i --crlf',
-    },
-    paste = {
-      ['+'] = 'win32yank.exe -o --lf',
-      ['*'] = 'win32yank.exe -o --lf',
-    },
-    cache_enabled = 0,
-  }
+require("leela.core")
+require("leela.lazy")
+
+if vim.fn.has("wsl") == 1 then
+	vim.g.clipboard = {
+		name = "win32yank-wsl",
+		copy = {
+			["+"] = "win32yank.exe -i --crlf",
+			["*"] = "win32yank.exe -i --crlf",
+		},
+		paste = {
+			["+"] = "win32yank.exe -o --lf",
+			["*"] = "win32yank.exe -o --lf",
+		},
+		cache_enabled = 0,
+	}
 end
+
+-- local colors = (vim.fn.getcompletion("", "color"))
+--
+-- local function random(tbl)
+-- 	math.randomseed(os.time())
+--
+-- 	local index = math.random(#tbl)
+--
+-- 	return tbl[index]
+-- end
+--
+-- local theme = random(colors)
+--
+-- vim.cmd("colorscheme" .. " " .. theme)

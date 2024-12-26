@@ -46,13 +46,15 @@ return {
 				--        
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
-				disabled_filetypes = { "alpha", "neo-tree" },
+				-- disabled_filetypes = { "alpha", "neo-tree" },
 				always_divide_middle = true,
 			},
 			sections = {
 				lualine_a = { mode },
 				lualine_b = { "branch" },
-				lualine_c = { { "filename", path = 1 } },
+				lualine_c = {
+					{ "filename", path = 1 },
+				},
 				lualine_x = {
 					-- diagnostics,
 					-- diff,
@@ -60,7 +62,7 @@ return {
 					{ "filetype", cond = hide_in_width },
 				},
 				-- lualine_y = { "location" },
-				-- lualine_z = { "progress" },
+				lualine_z = {},
 			},
 			inactive_sections = {
 				lualine_a = {},

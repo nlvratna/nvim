@@ -55,6 +55,12 @@ return {
 						["<C-l>"] = require("telescope.actions").select_default, -- open file
 					},
 				},
+
+				layout_strategy = "horizontal",
+				layout_config = { prompt_position = "top" },
+				sorting_strategy = "ascending",
+				winblend = 13,
+				preview = false,
 			},
 			pickers = {
 				find_files = {
@@ -95,7 +101,7 @@ return {
 		-- Slightly advanced example of overriding default behavior and theme
 		vim.keymap.set("n", "<leader>/", function()
 			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_ivy({
 				winblend = 10,
 				previewer = false,
 			}))
