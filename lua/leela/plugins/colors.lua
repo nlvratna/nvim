@@ -12,7 +12,33 @@ return {
 				},
 			})
 
-			-- vim.cmd("colorscheme rose-pine")
+			-- Telescope highlights for Rose Pine main variant
+			local colors = require("rose-pine.palette")
+
+			vim.cmd("highlight! link TelescopeBorder FloatBorder")
+			vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = colors.base, fg = colors.text })
+			vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = colors.base, fg = colors.rose })
+			vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = colors.text })
+			vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = colors.surface, fg = colors.rose })
+			vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = colors.surface, fg = colors.text })
+			vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = colors.surface, fg = colors.overlay })
+			vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = colors.overlay, fg = colors.text, bold = true })
+			vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = colors.rose, bold = true })
+			vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { bg = colors.base, fg = colors.text })
+			vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = colors.base, fg = colors.overlay })
+			vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg = colors.rose, fg = colors.base })
+
+			vim.api.nvim_set_hl(0, "NoicePopup", { bg = colors.base, fg = colors.text })
+			vim.api.nvim_set_hl(0, "NoicePopupBorder", { bg = colors.iris, fg = colors.overlay })
+			vim.api.nvim_set_hl(0, "NoiceCmdlinePopup", { bg = colors.overlay, fg = colors.foam })
+			vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { bg = colors.surface, fg = colors.rose })
+			vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = colors.iris, bold = true })
+			vim.api.nvim_set_hl(0, "NoiceCmdlinePrompt", { bg = colors.rose, fg = colors.rose, bold = true })
+			vim.api.nvim_set_hl(0, "NoiceConfirm", { bg = colors.base, fg = colors.gold })
+			vim.api.nvim_set_hl(0, "NoiceConfirmBorder", { bg = colors.base, fg = colors.overlay })
+			vim.api.nvim_set_hl(0, "NoiceVirtualText", { fg = colors.overlay })
+
+			vim.cmd("colorscheme rose-pine")
 		end,
 	},
 	{
@@ -33,13 +59,13 @@ return {
 				-- Change the "hint" color to the "orange" color, and make the "error" color bright red
 				on_colors = function(colors)
 					colors.hint = colors.orange
-					colors.error = "#ff0000"
+					-- colors.error = "#ff0000"
 					colors.green = "#9ccfd8"
 					colors.bg = "#191724"
-					colors.bg_dark = "#1f1d2e"
+					-- colors.bg_dark = "#1f1d2e"
 				end,
 			})
-			vim.cmd("colorscheme tokyonight-night")
+			-- vim.cmd("colorscheme tokyonight-night")
 		end,
 	},
 	{
@@ -59,9 +85,9 @@ return {
 				no_underline = false, -- Force no underline
 				color_overrides = {
 					mocha = {
-						base = "#000000",
-						mantle = "#000000",
-						crust = "#000000",
+						base = "#191724",
+						-- mantle = "#1f1d2e",
+						crust = "#26233a",
 					},
 				},
 			})

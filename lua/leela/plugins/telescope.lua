@@ -61,10 +61,13 @@ return {
 				sorting_strategy = "ascending",
 				winblend = 13,
 				preview = false,
+				hidden = true,
+				no_ignore = true,
 			},
 			pickers = {
 				find_files = {
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
+					no_ignore = true,
 					hidden = true,
 				},
 			},
