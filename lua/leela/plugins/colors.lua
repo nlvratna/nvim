@@ -31,7 +31,7 @@ return {
 			vim.api.nvim_set_hl(0, "NoicePopup", { bg = colors.base, fg = colors.text })
 			vim.api.nvim_set_hl(0, "NoicePopupBorder", { bg = colors.iris, fg = colors.overlay })
 			vim.api.nvim_set_hl(0, "NoiceCmdlinePopup", { bg = colors.overlay, fg = colors.foam })
-			vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { bg = colors.surface, fg = colors.rose })
+			vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { bg = colors.surface, fg = colors.overlay })
 			vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { fg = colors.iris, bold = true })
 			vim.api.nvim_set_hl(0, "NoiceCmdlinePrompt", { bg = colors.rose, fg = colors.rose, bold = true })
 			vim.api.nvim_set_hl(0, "NoiceConfirm", { bg = colors.base, fg = colors.gold })
