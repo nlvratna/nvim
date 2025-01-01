@@ -68,31 +68,4 @@ return {
 			-- vim.cmd("colorscheme tokyonight-night")
 		end,
 	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-
-		config = function()
-			require("catppuccin").setup({
-				flavour = "mocha", -- latte, frappe, macchiato, mocha
-				background = { -- :h background
-					light = "latte",
-					dark = "mocha",
-				},
-				no_italic = true, -- Force no italic
-				no_bold = true, -- Force no bold
-				no_underline = false, -- Force no underline
-				color_overrides = {
-					mocha = {
-						base = "#191724",
-						-- mantle = "#1f1d2e",
-						crust = "#26233a",
-					},
-				},
-			})
-
-			-- vim.cmd("colorscheme catppuccin")
-		end,
-	},
 }

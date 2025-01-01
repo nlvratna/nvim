@@ -1,17 +1,17 @@
 -- Standalone plugins with less than 10 lines of config go here
 return {
-	{
-		-- Tmux & split window navigation
-		"christoomey/vim-tmux-navigator",
-	},
+	-- {
+	-- 	-- Tmux & split window navigation
+	-- 	"christoomey/vim-tmux-navigator",
+	-- },
 	{
 		-- Detect tabstop and shiftwidth automatically
 		"tpope/vim-sleuth",
 	},
-	{
-		-- Powerful Git integration for Vim
-		"tpope/vim-fugitive",
-	},
+	-- {
+	-- 	-- Powerful Git integration for Vim
+	-- 	"tpope/vim-fugitive",
+	-- },
 
 	-- {
 	--   -- Autoclose parentheses, brackets, quotes, etc.
