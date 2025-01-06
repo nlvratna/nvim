@@ -13,6 +13,7 @@ return {
 				svelte = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
+				java = { "google-java-formatter" },
 				json = { "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
