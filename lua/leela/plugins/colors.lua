@@ -10,6 +10,11 @@ return {
 				styles = {
 					italic = false,
 				},
+				palette = {
+					main = {
+						base = "#000000",
+					},
+				},
 			})
 
 			-- Telescope highlights for Rose Pine main variant
