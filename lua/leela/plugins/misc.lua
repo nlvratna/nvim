@@ -4,22 +4,11 @@ return {
 		-- Tmux & split window navigation
 		"christoomey/vim-tmux-navigator",
 	},
-	-- {
-	-- 	-- Detect tabstop and shiftwidth automatically
-	-- 	"tpope/vim-sleuth",
-	-- },
 	{
 		-- Powerful Git integration for Vim
 		"tpope/vim-fugitive",
 	},
 
-	-- {
-	--   -- Autoclose parentheses, brackets, quotes, etc.
-	--   'windwp/nvim-autopairs',
-	--   event = 'InsertEnter',
-	--   config = true,
-	--   opts = {},
-	-- },
 	{
 		-- Highlight todo, notes, etc in comments
 		"folke/todo-comments.nvim",
@@ -55,6 +44,13 @@ return {
 		"norcalli/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup()
+		end,
+	},
+
+	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup() --has to be loaded before everything
 		end,
 	},
 }

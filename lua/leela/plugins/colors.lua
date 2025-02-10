@@ -66,7 +66,7 @@ return {
 					colors.hint = colors.orange
 					-- colors.error = "#ff0000"
 					colors.green = "#9ccfd8"
-					colors.bg = "#191724"
+					colors.bg = "#000000"
 					-- colors.bg_dark = "#1f1d2e"
 				end,
 			})
