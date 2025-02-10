@@ -4,7 +4,7 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		local harpoon = require("harpoon").setup()
-		vim.keymap.set("n", "<C-a>", function()
+		vim.keymap.set("n", "<C-w>", function()
 			harpoon:list():add()
 		end)
 		vim.keymap.set("n", "<C-e>", function()
