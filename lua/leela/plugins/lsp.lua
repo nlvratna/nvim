@@ -13,7 +13,6 @@ return {
 
 		-- Allows extra capabilities provided by nvim-cmp
 		"hrsh7th/cmp-nvim-lsp",
-		"saghen/blink.cmp",
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
