@@ -117,12 +117,37 @@ return {
 		version = "*",
 		opts = {
 			keymap = { preset = "default" },
-
 			appearance = {
-				use_nvim_cmp_as_default = true,
+				use_nvim_cmp_as_default = false,
 				nerd_font_variant = "mono",
 			},
-			completion = {},
+			completion = {
+
+				accept = { auto_bracets = { enabled = true } },
+
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 200,
+					treesitter_highlighting = true,
+					update_delay_ms = 50,
+				},
+
+				menu = {
+					-- border = "rounded",
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind" },
+						},
+						treesitter = { "lsp" },
+					},
+				},
+			},
+
+			signature = {
+				enabled = true,
+			},
+
 			-- default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
