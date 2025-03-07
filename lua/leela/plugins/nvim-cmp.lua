@@ -141,7 +141,19 @@ return {
 			},
 
 			signature = {
+
 				enabled = true,
+			},
+			cmdline = {
+				enabled = true,
+				-- keymap = {
+				-- 	["<Tab>"] = { "show", "accept" },
+				-- },
+				completion = {
+					menu = {
+						auto_show = true,
+					},
+				},
 			},
 
 			-- default list of enabled providers defined so that you can extend it
