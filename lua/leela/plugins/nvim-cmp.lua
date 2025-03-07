@@ -122,14 +122,10 @@ return {
 				nerd_font_variant = "mono",
 			},
 			completion = {
-
-				accept = { auto_bracets = { enabled = true } },
-
+				accept = {},
 				documentation = {
 					auto_show = true,
-					auto_show_delay_ms = 200,
 					treesitter_highlighting = true,
-					update_delay_ms = 50,
 				},
 
 				menu = {

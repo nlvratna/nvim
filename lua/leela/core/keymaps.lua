@@ -75,7 +75,6 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open float
 vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Exit insert mode without hitting Esc
-vim.keymap.set("i", "jj", "<Esc><Esc>", { desc = "Esc" })
 
 --Oil
 vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })

@@ -4,7 +4,7 @@ return {
 	config = function()
 		local opts = { noremap = true, silent = true }
 		vim.keymap.set("n", "<C-_>", require("Comment.api").toggle.linewise.current, opts)
-		vim.keymap.set("n", "<C-c>", require("Comment.api").toggle.linewise.current, opts)
+		-- vim.keymap.set("n", "<C-c>", require("Comment.api").toggle.linewise.current, opts)
 		vim.keymap.set("n", "<C-/>", require("Comment.api").toggle.linewise.current, opts)
 		vim.keymap.set(
 			"v",
@@ -26,4 +26,4 @@ return {
 		)
 	end,
 }
- --haha working finally
+--haha working finally
