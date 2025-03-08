@@ -1,6 +1,5 @@
 require("leela.core")
 require("leela.lazy")
-
 if vim.fn.has("wsl") == 1 then
 	vim.g.clipboard = {
 		name = "win32yank-wsl",
