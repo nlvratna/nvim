@@ -2,13 +2,16 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Disable the spacebar key's default behavior in Normal and Visual modes
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-
--- vim.keymap.set("n", "-", vim.cmd.Ex)
 -- For conciseness
 local opts = { noremap = true, silent = true }
 
+-- Disable the spacebar key's default behavior in Normal and Visual modes
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
+vim.keymap.set("n", "-", vim.cmd.Ex, opts)
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- yank into "-" register
 vim.keymap.set({ "n", "v" }, "<leader>y", '"-yy', opts)
 -- delete to _ register
@@ -19,7 +22,7 @@ vim.keymap.set({ "n", "v" }, "<leader>p", '"-p', opts)
 
 vim.keymap.set({ "n", "v" }, "<leader>e", '"-p', opts)
 
-vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", opts)
+vim.keymap.set("n", "<C-c>", "<cmd> w <CR>", opts)
 -- save file without auto-formatting
 vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", opts)
 
@@ -68,11 +71,11 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
--- Diagnostic keymaps
+-- -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
+-- vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+-- vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+--
 --Oil
-vim.keymap.set("n", "-", "<CMD>Oil <CR>", { desc = "Open parent directory" })
+-- vim.keymap.set("n", "-", "<CMD>Oil <CR>", { desc = "Open parent directory" })
