@@ -1,14 +1,7 @@
 return {
 
 	"folke/trouble.nvim",
-	opts = {
-		defaults = {
-			keys = {
-				["["] = "next",
-				["]"] = "prev",
-			},
-		},
-	},
+	opts = {},
 	cmd = "Trouble",
 	keys = {
 		{

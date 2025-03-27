@@ -15,7 +15,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- yank into "-" register
 vim.keymap.set({ "n", "v" }, "<leader>y", '"-yy', opts)
 -- delete to _ register
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_dd', opts)
+vim.keymap.set({ "n", "v" }, "<leader>x", '"_dd', opts)
 
 -- paste from - register
 vim.keymap.set({ "n", "v" }, "<leader>p", '"-p', opts)
@@ -63,7 +63,6 @@ vim.keymap.set("n", "<leader>tp", ":tabp<CR>", opts) --  go to previous tab
 
 -- Toggle line wrapping
 vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
-
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
@@ -74,7 +73,7 @@ vim.keymap.set("v", "p", '"_dP', opts)
 -- -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
--- vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", ";s", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 -- vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 --
 --Oil
