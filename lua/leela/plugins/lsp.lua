@@ -25,6 +25,7 @@ return {
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				map(";a", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+				map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 					local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
