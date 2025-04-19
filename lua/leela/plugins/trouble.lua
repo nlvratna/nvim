@@ -1,3 +1,5 @@
+-- return {}
+-- we will try without it
 return {
 
 	"folke/trouble.nvim",

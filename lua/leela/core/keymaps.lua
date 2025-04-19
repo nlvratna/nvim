@@ -77,8 +77,9 @@ end, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Go to previous diagnostic message" })
+
 vim.keymap.set("n", ";s", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 -- vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
---
+
 --Oil
 -- vim.keymap.set("n", "-", "<CMD>Oil <CR>", { desc = "Open parent directory" })
