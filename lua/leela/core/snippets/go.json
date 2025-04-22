@@ -1,0 +1,62 @@
+{
+  "if err return": {
+    "prefix": "ifr",
+    "body": ["if err != nil {", "return err", "}"],
+    "description": "If error block with return err"
+  },
+  "if err print and return": {
+    "prefix": "ef",
+    "body": ["if err != nil {", " fmt.Println(err)", "return err", "}"],
+    "description": "If error block with return err"
+  },
+  "if err return formatted error": {
+    "prefix": "ife",
+    "body": [
+      "if err != nil {",
+      "return fmt.Errorf(\"${1:context}:\",err)",
+      "}"
+    ],
+    "description": "If error block with return err"
+  },
+  "if error log": {
+    "prefix": "ifl",
+    "body": ["if err != nil {", "log.Println(err)", "}"],
+    "description": "log the error"
+  },
+
+  "if error fmt": {
+    "prefix": "iff",
+    "body": [
+      "if err != nil {",
+      "fmt.Printf(\"error in ${1:context:%v\",err)",
+      "}"
+    ],
+
+    "description": "print the error to the console with context"
+  },
+  "if error return with values": {
+    "prefix": "ifv",
+    "body": ["if err != nil {", "\treturn $1, err", "}"],
+    "description": "return nil/default values and error "
+  },
+  "if error return  formatted error with values": {
+    "prefix": "ev",
+    "body": ["if err != nil {", "return $1 fmt.Errorf(\"$2:\",err)", "}"],
+    "description": "return nil/default values and error "
+  },
+  "create struct": {
+    "prefix": "str",
+    "body": ["type ${1:name} struct {", "\t$0", "}"],
+    "description": "create a new struct"
+  },
+  " if error non assign only block  return error": {
+    "prefix": "eff",
+    "body": ["if err = ${1:func}; err != nil {", "return err", "}"],
+    "description": "if  err function block returns err"
+  },
+  "create function": {
+    "prefix": "fn",
+    "body": ["func ${1:name}() ${2:return} {", "\t$0", "}"],
+    "description": "create a new funtion"
+  }
+}
