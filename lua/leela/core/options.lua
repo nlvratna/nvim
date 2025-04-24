@@ -34,3 +34,4 @@ vim.o.writebackup = false -- If a file is being edited by another program (or wa
 vim.o.undofile = true -- Save undo history (default: false)
 vim.o.completeopt = "menuone,noselect" -- Set completeopt to have a better completion experience (default: 'menu,preview')
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
+vim.g.have_nerd_font = true --set to false If I become rogue

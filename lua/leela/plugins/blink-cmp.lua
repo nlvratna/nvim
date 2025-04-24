@@ -1,14 +1,38 @@
 return {
 	{
 		"saghen/blink.cmp",
-		dependencies = "rafamadriz/friendly-snippets",
+		-- dependencies = "rafamadriz/friendly-snippets",
+		dependencies = {
+			{
+				"L3MON4D3/LuaSnip",
+				version = "v2.*",
+				build = " make  install_jsregexp",
+			},
+
+			{
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
+				opts = {
+					library = {
+						-- See the configuration section for more details
+						-- Load luvit types when the `vim.uv` word is found
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					},
+				},
+			},
+		},
 		version = "*",
+
 		opts = {
-			keymap = { preset = "default" },
+			keymap = {
+				preset = "default",
+			},
+			snippets = { preset = "luasnip" },
 			appearance = {
-				use_nvim_cmp_as_default = false,
+				use_nvim_cmp_as_default = true,
 				nerd_font_variant = "mono",
 			},
+			signature = { enabled = true },
 			completion = {
 				accept = {
 					auto_brackets = {
@@ -47,12 +71,20 @@ return {
 			-- default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+				-- providers = {
+				-- 	snippets = {
+				-- 		opts = {
+				-- 			search_paths = { vim.fn.stdpath("config") .. "/lua/leela/core/snippets" },
+				-- 		},
+				-- 	},
+				-- },
 				providers = {
-					snippets = {
-						opts = {
-							search_paths = { vim.fn.stdpath("config") .. "/lua/leela/core/snippets" },
-						},
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						-- make lazydev completions top priority (see `:h blink.cmp`)
+						score_offset = 100,
 					},
 				},
 			},

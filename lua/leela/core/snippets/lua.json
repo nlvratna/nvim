@@ -1,7 +1,0 @@
-{
-  "test": {
-    "prefix": "test",
-    "body": "hello",
-    "description": "just a test"
-  }
-}
