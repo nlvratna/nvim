@@ -1,14 +1,15 @@
-return {
-	"folke/trouble.nvim",
-	lazy = true,
-	event = "DiagnosticChanged",
-	config = function()
-		local trouble = require("trouble")
-		-- vim.keymap.set("n", "<leader>t", function()
-		-- 	trouble.toggle("diagnostics")
-		-- end)
-		vim.keymap.set("n", "<leader>q", function()
-			trouble.toggle("qflist")
-		end)
-	end,
-}
+return {}
+-- return {
+-- 	"folke/trouble.nvim",
+-- 	lazy = true,
+-- 	event = "DiagnosticChanged",
+-- 	config = function()
+-- 		local trouble = require("trouble")
+-- 		-- vim.keymap.set("n", "<leader>t", function()
+-- 		-- 	trouble.toggle("diagnostics")
+-- 		-- end)
+-- 		vim.keymap.set("n", "<leader>q", function()
+-- 			trouble.toggle("qflist")
+-- 		end)
+-- 	end,
+-- }
