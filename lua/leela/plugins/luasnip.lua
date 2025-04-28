@@ -1,8 +1,9 @@
 return {
 	"L3MON4D3/LuaSnip",
 	version = "v2.*", -- or latest
+	event = "InsertEnter",
 	build = "make install_jsregexp", -- needed for some snippet types
-	dependencies = { "rafamadriz/friendly-snippets" },
+	dependencies = { "rafamadriz/friendly-snippets", event = "InsertEnter" },
 
 	config = function()
 		require("luasnip").setup({

@@ -1,11 +1,12 @@
 return {
 	"numToStr/Comment.nvim",
+	lazy = true,
+	event = { "BufRead", "BufReadPost" },
 	opts = {},
 	config = function()
 		local opts = { noremap = true, silent = true }
 		vim.keymap.set("n", "<C-_>", require("Comment.api").toggle.linewise.current, opts)
 		-- vim.keymap.set("n", "<C-c>", require("Comment.api").toggle.linewise.current, opts)
-		vim.keymap.set("n", "<C-/>", require("Comment.api").toggle.linewise.current, opts)
 		vim.keymap.set(
 			"v",
 			"<C-_>",

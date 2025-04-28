@@ -39,7 +39,7 @@ vim.keymap.set("n", "N", "Nzzzv", opts)
 -- Buffers
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
-vim.keymap.set("n", "<leader>v", ":bdelete!<CR>", opts) -- close buffer
+vim.keymap.set("n", "<leader>d", ":bdelete!<CR>", opts) -- close buffer
 vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts) -- new buffer
 
 -- not needed for me mostly
@@ -50,10 +50,6 @@ vim.keymap.set("n", "<leader>se", "<C-w>=", opts) -- make split windows equal wi
 vim.keymap.set("n", "<leader>cs", ":close<CR>", opts) -- close current split window
 
 -- Navigate between splits
-vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", opts)
-vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", opts)
-vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", opts)
-vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", opts)
 
 -- Tabs
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>", opts) -- open new tab
@@ -71,14 +67,6 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
-vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", "<leader>v", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "[t", "<cmd>cnext<CR>")
 vim.keymap.set("n", "]t", "<cmd>cprev<CR>")
--- vim.keymap.set("n", "<leader>t", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
---Oil
--- vim.keymap.set("n", "-", "<CMD>Oil --float <CR>", { desc = "Open parent directory" })
---
---
---
--- use the vim.diagnostic.get and set the currrent buf using nvim_set_current_buf and use vim.diagnostic.jump ther to get to that
