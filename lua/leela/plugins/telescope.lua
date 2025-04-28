@@ -25,39 +25,36 @@ return {
 					},
 				},
 
-				layout_strategy = "horizontal",
 				sorting_strategy = "ascending",
 				winblend = 13,
-				preview = false,
 				hidden = true,
 				no_ignore = true,
+				preview = false,
+				layout_config = { prompt_position = "top" },
 			},
 			pickers = {
 				find_files = {
 					theme = "ivy",
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
-					layout_config = { prompt_position = "top" },
 					no_ignore = true,
-					hidden = true,
 				},
 				lsp_references = {
 					theme = "ivy",
-					layout_config = { prompt_position = "top" },
 					initial_mode = "normal",
 					preview = true,
 				},
 				diagnostics = {
 					theme = "cursor",
-					layout_config = { prompt_position = "top" },
 					initial_mode = "normal",
 				},
 				grep_string = {
 					theme = "ivy",
-					layout_config = { prompt_position = "top" },
 					initial_mode = "normal",
 					preview = true,
 				},
 				live_grep = {
+					theme = "ivy",
+					preview = true,
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
 					additional_args = function(_)
 						return { "--hidden" }
