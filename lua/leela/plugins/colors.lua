@@ -14,13 +14,18 @@ return {
 					main = {
 						base = "#000000",
 					},
-					moon = {
-						base = "#000000",
-					},
+				},
+				highlight_groups = {
+					TelescopeNormal = { bg = "base" },
+					TelescopeResultsNormal = { bg = "base" },
+					TelescopePromptsNormal = { bg = "base" },
+					TelescopeBorder = { bg = "base" },
+					-- BlinkCmpDoc = { bg = "highlight_low" },
 				},
 			})
 
 			vim.cmd("colorscheme rose-pine")
+			-- vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#191724" }) future reference
 		end,
 	},
 	{

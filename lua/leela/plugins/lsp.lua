@@ -25,9 +25,9 @@ return {
 				map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 				map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-				map(";a", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+				map("<C-o>", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-				-- map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
+				map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
 
 				local function client_supports_method(client, method, bufnr)
 					if vim.fn.has("nvim-0.11") == 1 then
@@ -80,7 +80,6 @@ return {
 		local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
 
 		local servers = {
-			-- clangd = {},
 			gopls = {
 				analyses = {
 					unusedparams = true,
@@ -89,9 +88,7 @@ return {
 				gofumpt = true,
 			},
 			html = { filetypes = { "html", "twig", "hbs" } },
-			cssls = {},
 			tailwindcss = {},
-			jsonls = {},
 
 			lua_ls = {
 				-- cmd = {...},
