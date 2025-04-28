@@ -1,5 +1,6 @@
 require("leela.core.options")
 require("leela.core.keymaps")
+require("leela.core.diagnostics")
 
 vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
 

@@ -26,7 +26,6 @@ return {
 				},
 
 				layout_strategy = "horizontal",
-				layout_config = { prompt_position = "bottom" },
 				sorting_strategy = "ascending",
 				winblend = 13,
 				preview = false,
@@ -35,16 +34,35 @@ return {
 			},
 			pickers = {
 				find_files = {
+					theme = "ivy",
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
+					layout_config = { prompt_position = "top" },
 					no_ignore = true,
 					hidden = true,
 				},
-			},
-			live_grep = {
-				file_ignore_patterns = { "node_modules", ".git", ".venv" },
-				additional_args = function(_)
-					return { "--hidden" }
-				end,
+				lsp_references = {
+					theme = "ivy",
+					layout_config = { prompt_position = "top" },
+					initial_mode = "normal",
+					preview = true,
+				},
+				diagnostics = {
+					theme = "cursor",
+					layout_config = { prompt_position = "top" },
+					initial_mode = "normal",
+				},
+				grep_string = {
+					theme = "ivy",
+					layout_config = { prompt_position = "top" },
+					initial_mode = "normal",
+					preview = true,
+				},
+				live_grep = {
+					file_ignore_patterns = { "node_modules", ".git", ".venv" },
+					additional_args = function(_)
+						return { "--hidden" }
+					end,
+				},
 			},
 			extensions = {
 				["ui-select"] = {
@@ -71,6 +89,7 @@ return {
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader>sd", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		vim.keymap.set("n", "<leader>t", builtin.diagnostics)
 		-- vim.keymap.set("n", "<leader>g", require("telescope.builtin").git_commits({ preview = true }))
 		-- vim.keymap.set("n", "<leader>gb", require("telescope.builtin").git_bcommits({ preview = true }))
 		-- vim.keymap.set("n", "<leader>gs", require("telescope.builtin").git_status({ preview = true }))

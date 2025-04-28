@@ -19,6 +19,7 @@ return {
 				end
 
 				map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+				map("gr", vim.lsp.buf.references, "Show References")
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				map("<C-o>", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 				map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
