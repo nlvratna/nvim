@@ -24,15 +24,15 @@ return {
 						["<C-l>"] = require("telescope.actions").select_default, -- open file
 					},
 				},
-
 			},
 			pickers = {
 				find_files = {
 					theme = "ivy",
-                    hidden = true,
-                    no_ignore = true,
+					hidden = true,
+					no_ignore = true,
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
 					no_ignore = true,
+					preview = false,
 				},
 				lsp_references = {
 					theme = "ivy",
