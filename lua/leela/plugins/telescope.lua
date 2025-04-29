@@ -25,16 +25,12 @@ return {
 					},
 				},
 
-				sorting_strategy = "ascending",
-				winblend = 13,
-				hidden = true,
-				no_ignore = true,
-				preview = false,
-				layout_config = { prompt_position = "top" },
 			},
 			pickers = {
 				find_files = {
 					theme = "ivy",
+                    hidden = true,
+                    no_ignore = true,
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
 					no_ignore = true,
 				},
