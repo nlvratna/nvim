@@ -5,7 +5,6 @@ require("leela.core.diagnostics")
 vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("lsp fucntions", { clear = true }),
 	callback = function(event)
 		local map = function(keys, func, desc, mode)
 			mode = mode or "n"
@@ -15,7 +14,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 		map("gr", vim.lsp.buf.references, "Show References")
 		map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-		map("<C-o>", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+		map("<leader>o", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 		map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
 
 		local function client_supports_method(client, method, bufnr)
@@ -41,12 +40,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		--		group = highlight_augroup,
 		--		callback = vim.lsp.buf.clear_references,
 		--	})
-
 		vim.api.nvim_create_autocmd("LspDetach", {
-			group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+			group = vim.api.nvim_create_augroup("ratna", { clear = true }),
 			callback = function(event2)
 				vim.lsp.buf.clear_references()
-				vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+				vim.api.nvim_clear_autocmds({ group = "ratna", buffer = event2.buf })
 			end,
 		})
 	end,

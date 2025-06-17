@@ -1,81 +1,104 @@
 local diag_next = function()
 	local diagnostics = vim.diagnostic.get()
 	local current_buf = vim.api.nvim_get_current_buf()
+	local current_row, current_col = unpack(vim.api.nvim_win_get_cursor(0))
 
-	-- If no diagnostics, notify and return
 	if #diagnostics == 0 then
 		vim.notify("No diagnostics available", vim.log.levels.WARN)
 		return
 	end
 
-	-- Find the current diagnostic index
-	local current_index = nil
-	for idx, diag in ipairs(diagnostics) do
-		if current_buf == diag.bufnr then
-			-- Check for the current diagnostic in the same buffer
-			current_index = idx
-			break
+	local found_next_diag = nil
+	local first_diag_in_list = diagnostics[1] -- Keep track of the very first diagnostic for wraparound
+
+	-- Try to find the next diagnostic *after* the current cursor position in the current buffer
+	for _, diag in ipairs(diagnostics) do
+		if diag.bufnr == current_buf then
+			-- Compare line numbers first, then column numbers
+			if diag.lnum > current_row or (diag.lnum == current_row and diag.col > current_col) then
+				found_next_diag = diag
+				break -- Found the next diagnostic in the current buffer
+			end
 		end
 	end
 
-	-- If no diagnostics in current buffer, wrap around to the first diagnostic
-	if not current_index then
-		current_index = 1
+	-- If no diagnostic found after current position in current buffer, find the first in *any* buffer after current
+	if not found_next_diag then
+		for _, diag in ipairs(diagnostics) do
+			if diag.bufnr > current_buf then -- prioritize different buffers with higher bufnr
+				found_next_diag = diag
+				break
+			elseif diag.bufnr == current_buf and diag.lnum >= current_row then -- current buffer again but after current line
+				found_next_diag = diag
+				break
+			end
+		end
 	end
 
-	-- Jump to the next diagnostic in the list with wraparound
-	local next_index = current_index + 1
-	if next_index > #diagnostics then
-		-- Wrap around to the first diagnostic if the end of the list is reached
-		next_index = 1
+	if not found_next_diag then
+		found_next_diag = first_diag_in_list
 	end
 
-	local next_diag = diagnostics[next_index]
-
-	vim.api.nvim_set_current_buf(next_diag.bufnr)
-
-	-- Jump to diagnostic and show float using the proper jump function
-	vim.diagnostic.jump({ count = 1, float = true })
+	vim.api.nvim_set_current_buf(found_next_diag.bufnr)
+	-- Diagnostics are 0-indexed for lnum and col, so add 1 for nvim_win_set_cursor
+	vim.api.nvim_win_set_cursor(0, { found_next_diag.lnum + 1, found_next_diag.col })
+	-- vim.diagnostic.open_float({
+	-- 	scope = "line",
+	-- })
 end
 
 local diag_prev = function()
 	local diagnostics = vim.diagnostic.get()
 	local current_buf = vim.api.nvim_get_current_buf()
+	local current_row, current_col = unpack(vim.api.nvim_win_get_cursor(0))
 
-	-- If no diagnostics, notify and return
 	if #diagnostics == 0 then
 		vim.notify("No diagnostics available", vim.log.levels.WARN)
 		return
 	end
 
-	-- Find the current diagnostic index
-	local current_index = nil
-	for idx, diag in ipairs(diagnostics) do
-		if current_buf == diag.bufnr then
-			-- Check for the current diagnostic in the same buffer
-			current_index = idx
-			break
+	local found_prev_diag = nil
+	local last_diag_in_list = diagnostics[#diagnostics] -- Keep track of the very last diagnostic for wraparound
+
+	-- Try to find the previous diagnostic *before* the current cursor position in the current buffer
+	-- Iterate backward to easily find the "last" previous diagnostic
+	for i = #diagnostics, 1, -1 do
+		local diag = diagnostics[i]
+		if diag.bufnr == current_buf then
+			if diag.lnum < current_row or (diag.lnum == current_row and diag.col < current_col) then
+				found_prev_diag = diag
+				break -- Found the previous diagnostic in the current buffer
+			end
 		end
 	end
-	-- If no diagnostics in current buffer, wrap around to the last diagnostic
-	if not current_index then
-		current_index = #diagnostics
+
+	-- If no diagnostic found before current position in current buffer, find the last in *any* buffer before current
+	if not found_prev_diag then
+		for i = #diagnostics, 1, -1 do
+			local diag = diagnostics[i]
+			if diag.bufnr < current_buf then
+				found_prev_diag = diag
+				break
+			elseif diag.bufnr == current_buf and diag.lnum <= current_row then
+				found_prev_diag = diag
+				break
+			end
+		end
 	end
 
-	-- Jump to the previous diagnostic in the list with wraparound
-	local prev_index = current_index - 1
-	if prev_index < 1 then
-		-- Wrap around to the last diagnostic if the beginning of the list is reached
-		prev_index = #diagnostics
+	-- If still no previous diagnostic found (meaning we are at the beginning or no diagnostics before cursor),
+	-- wrap around to the very last diagnostic in the entire list.
+	if not found_prev_diag then
+		found_prev_diag = last_diag_in_list
 	end
 
-	local prev_diag = diagnostics[prev_index]
-	vim.api.nvim_set_current_buf(prev_diag.bufnr)
-	vim.diagnostic.jump({ count = -1, float = true })
+	vim.api.nvim_set_current_buf(found_prev_diag.bufnr)
+	vim.api.nvim_win_set_cursor(0, { found_prev_diag.lnum + 1, found_prev_diag.col })
 end
 
 vim.diagnostic.config({
 	severity_sort = true,
+	jump = { float = true },
 	float = { border = "rounded", source = "if_many" },
 	underline = { severity = vim.diagnostic.severity.ERROR },
 	signs = vim.g.have_nerd_font and {
@@ -103,7 +126,7 @@ vim.diagnostic.config({
 })
 vim.keymap.set("n", "[d", function()
 	diag_next()
-end)
+end, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "]d", function()
 	diag_prev()
-end)
+end, { desc = "Go to previous diagnostic" })

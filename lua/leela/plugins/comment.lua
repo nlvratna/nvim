@@ -14,12 +14,6 @@ return {
 		)
 		vim.keymap.set(
 			"v",
-			"<C-c>",
-			"<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-			opts
-		)
-		vim.keymap.set(
-			"v",
 			"<C-/>",
 			"<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
 			opts
