@@ -1,7 +1,7 @@
 local diag_next = function()
 	local diagnostics = vim.diagnostic.get()
 	local current_buf = vim.api.nvim_get_current_buf()
-	local current_row, current_col = unpack(vim.api.nvim_win_get_cursor(0))
+	-- local current_row, current_col = unpack(vim.api.nvim_win_get_cursor(0))
 
 	if #diagnostics == 0 then
 		vim.notify("No diagnostics available", vim.log.levels.WARN)
@@ -15,10 +15,10 @@ local diag_next = function()
 	for _, diag in ipairs(diagnostics) do
 		if diag.bufnr == current_buf then
 			-- Compare line numbers first, then column numbers
-			if diag.lnum > current_row or (diag.lnum == current_row and diag.col > current_col) then
-				found_next_diag = diag
-				break -- Found the next diagnostic in the current buffer
-			end
+			found_next_diag = diag
+			-- if diag.lnum > current_row or (diag.lnum == current_row and diag.col > current_col) then
+			-- 	break -- Found the next diagnostic in the current buffer
+			-- end
 		end
 	end
 
@@ -26,9 +26,6 @@ local diag_next = function()
 	if not found_next_diag then
 		for _, diag in ipairs(diagnostics) do
 			if diag.bufnr > current_buf then -- prioritize different buffers with higher bufnr
-				found_next_diag = diag
-				break
-			elseif diag.bufnr == current_buf and diag.lnum >= current_row then -- current buffer again but after current line
 				found_next_diag = diag
 				break
 			end
