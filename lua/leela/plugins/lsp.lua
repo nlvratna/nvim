@@ -1,8 +1,6 @@
 return {
 	-- Main LSP Configuration
 	"neovim/nvim-lspconfig",
-	lazy = true,
-	event = { "BufReadPost", "BufNewFile" },
 	dependencies = {
 		"saghen/blink.cmp",
 		-- "hrsh7th/cmp-nvim-lsp",
@@ -51,6 +49,10 @@ return {
 		}
 
 		require("mason-lspconfig").setup({
+			ensure_installed = {
+				"gopls",
+				"lua_ls",
+			},
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}

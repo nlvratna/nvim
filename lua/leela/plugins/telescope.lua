@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	event = "VimEnter",
+	-- event = "VimEnter",
 	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -17,40 +17,27 @@ return {
 	config = function()
 		require("telescope").setup({
 			defaults = {
-				mappings = {
-					i = {
-						["<C-k>"] = require("telescope.actions").move_selection_previous, -- move to prev result
-						["<C-j>"] = require("telescope.actions").move_selection_next, -- move to next result
-						["<C-l>"] = require("telescope.actions").select_default, -- open file
-					},
-				},
+				preview = false,
 			},
 			pickers = {
 				find_files = {
-					theme = "ivy",
 					hidden = true,
-					no_ignore = true,
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
 					no_ignore = true,
-					preview = false,
 				},
 				lsp_references = {
-					theme = "ivy",
 					initial_mode = "normal",
+				},
+				lsp_document_symbols = {
 					preview = true,
 				},
 				diagnostics = {
-					theme = "ivy",
 					initial_mode = "normal",
 				},
 				grep_string = {
-					theme = "ivy",
 					initial_mode = "normal",
-					preview = true,
 				},
 				live_grep = {
-					theme = "ivy",
-					preview = true,
 					file_ignore_patterns = { "node_modules", ".git", ".venv" },
 					additional_args = function(_)
 						return { "--hidden" }
@@ -76,32 +63,17 @@ return {
 		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 		vim.keymap.set("n", "<leader>g", function()
 			builtin.grep_string({
-				search = vim.fn.input({ prompt = "grep> " }),
+				search = vim.fn.input({ prompt = "grep > " }),
 			})
 		end, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-		vim.keymap.set("n", "<leader>sd", builtin.buffers, { desc = "[ ] Find existing buffers" })
 		vim.keymap.set("n", "<leader>t", builtin.diagnostics)
-		-- vim.keymap.set("n", "<leader>g", require("telescope.builtin").git_commits({ preview = true }))
-		-- vim.keymap.set("n", "<leader>gb", require("telescope.builtin").git_bcommits({ preview = true }))
-		-- vim.keymap.set("n", "<leader>gs", require("telescope.builtin").git_status({ preview = true }))
-		-- Slightly advanced example of overriding default behavior and theme
-		vim.keymap.set("n", "<leader>/", function()
-			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_ivy({
-				winblend = 10,
-				previewer = false,
-			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
-
-		-- It's also possible to pass additional configuration options.
-		--  See `:help telescope.builtin.live_grep()` for information about particular keys
-		vim.keymap.set("n", "<leader>s/", function()
+		vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find)
+		vim.keymap.set("n", "<leader>j", function()
 			builtin.live_grep({
 				grep_open_files = true,
 				prompt_title = "Live Grep in Open Files",
 			})
-		end, { desc = "[S]earch [/] in Open Files" })
+		end, { desc = "Grep in Open files" })
 	end,
 }
