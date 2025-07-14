@@ -17,15 +17,43 @@ return {
 					unusedparams = true,
 				},
 				staticcheck = true,
-				gofumpt = true,
+				-- gofumpt = true,
 			},
-			html = { filetypes = { "html", "twig", "hbs" } },
-			tailwindcss = {},
+			html = { filetypes = { "templ", "html", "twig", "hbs" } },
+
+			tailwindcss = {
+				filetypes = {
+					"templ",
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+				},
+				init_options = {
+					userLanguages = {
+						templ = "html",
+					},
+				},
+				settings = {
+					tailwindCSS = {
+						experimental = {
+							classRegex = {
+								-- for templ or other non-standard syntaxes
+								{ "tw`([^`]*)", 1 },
+								{ 'tw="([^"]*)', 1 },
+								{ "tw\\(([^)]*)\\)", 1 },
+								{ "class:([\\w-]+)", 1 },
+								{ 'class\\s*=\\s*"([^"]*)', 1 },
+							},
+						},
+					},
+				},
+			},
 
 			lua_ls = {
-				-- cmd = {...},
-				-- filetypes = { ...},
-				-- capabilities = {},
 				settings = {
 					Lua = {
 						completion = {

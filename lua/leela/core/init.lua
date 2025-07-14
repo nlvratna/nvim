@@ -4,6 +4,11 @@ require("leela.core.diagnostics")
 
 vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
 
+vim.filetype.add({
+	extension = {
+		templ = "templ",
+	},
+})
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
 		local map = function(keys, func, desc, mode)

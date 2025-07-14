@@ -3,7 +3,9 @@ return {
 	version = "v2.*", -- or latest
 	event = "InsertEnter",
 	build = "make install_jsregexp", -- needed for some snippet types
-	dependencies = { "rafamadriz/friendly-snippets", event = "InsertEnter" },
+	dependencies = {
+		"rafamadriz/friendly-snippets",
+	},
 
 	config = function()
 		require("luasnip").setup({
@@ -13,10 +15,8 @@ return {
 		-- require("luasnip.loaders.from_lua").lazy_load({
 		-- 	paths = { vim.fn.stdpath("config") .. "/lua/leela/core/snippets" },
 		-- })
-		-- require("luasnip.loaders.from_vscode").lazy_load({
-		-- 	paths = { vim.fn.stdpath("config") .. "/lua/leela/core/snippets/vscode" },
-		-- })
-
-		require("luasnip.loaders.from_vscode").lazy_load()
+		require("luasnip.loaders.from_vscode").lazy_load({
+			paths = { vim.fn.stdpath("config") .. "/lua/leela/core/snippets/vscode" },
+		})
 	end,
 }

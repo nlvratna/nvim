@@ -19,4 +19,10 @@ return {
 			require("mason").setup() --has to be loaded before everything
 		end,
 	},
+	-- {
+	-- 	"mluders/comfy-line-numbers.nvim",
+	-- 	config = function()
+	-- 		require("comfy-line-numbers").setup()
+	-- 	end,
+	-- },
 }
