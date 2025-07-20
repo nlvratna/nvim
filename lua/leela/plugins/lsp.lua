@@ -3,7 +3,6 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		"saghen/blink.cmp",
-		-- "hrsh7th/cmp-nvim-lsp",
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
@@ -17,7 +16,7 @@ return {
 					unusedparams = true,
 				},
 				staticcheck = true,
-				-- gofumpt = true,
+				gofumpt = true,
 			},
 			html = { filetypes = { "templ", "html", "twig", "hbs" } },
 

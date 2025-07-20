@@ -1,6 +1,5 @@
 return {
 	"saghen/blink.cmp",
-	-- dependencies = "rafamadriz/friendly-snippets",
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
@@ -20,7 +19,7 @@ return {
 			},
 		},
 	},
-	version = "*",
+	version = "1.*",
 	event = "InsertEnter",
 
 	opts = {
@@ -72,13 +71,6 @@ return {
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
 			default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-			-- providers = {
-			-- 	snippets = {
-			-- 		opts = {
-			-- 			search_paths = { vim.fn.stdpath("config") .. "/lua/leela/core/snippets" },
-			-- 		},
-			-- 	},
-			-- },
 			providers = {
 				lazydev = {
 					name = "LazyDev",
