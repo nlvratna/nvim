@@ -27,4 +27,10 @@ return {
 			-- vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#191724" }) future reference
 		end,
 	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
 }

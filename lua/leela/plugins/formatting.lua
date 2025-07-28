@@ -6,7 +6,7 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				go = { "gofmt" },
+				go = { "gofumpt" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 				javascriptreact = { "prettier" },
