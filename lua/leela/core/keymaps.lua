@@ -12,6 +12,7 @@ vim.keymap.set("n", "-", vim.cmd.Ex, opts)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "L", ":join")
 
 -- yank into  system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', opts)

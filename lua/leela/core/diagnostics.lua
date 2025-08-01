@@ -87,7 +87,7 @@ local diag_prev = function()
 
 	vim.api.nvim_set_current_buf(found_diag.bufnr)
 	vim.api.nvim_win_set_cursor(0, { found_diag.lnum + 1, found_diag.col })
-	vim.diagnostic.open_float(nil, { scope = "line" })
+	-- vim.diagnostic.open_float(nil, { scope = "line" })
 end
 
 vim.diagnostic.config({
