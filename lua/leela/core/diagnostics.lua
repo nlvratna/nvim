@@ -124,4 +124,3 @@ end, { desc = "Go to next diagnostic" })
 vim.keymap.set("n", "]d", function()
 	diag_prev()
 end, { desc = "Go to previous diagnostic" })
--- return {}
