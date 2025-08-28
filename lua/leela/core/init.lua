@@ -1,6 +1,5 @@
 require("leela.core.options")
 require("leela.core.keymaps")
-require("leela.core.diagnostics")
 
 vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
 
@@ -25,14 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("<leader>o", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 		map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
 
-		local function client_supports_method(client, method, bufnr)
-			if vim.fn.has("nvim-0.11") == 1 then
-				return client:supports_method(method, bufnr)
-			else
-				return client.supports_method(method, { bufnr = bufnr })
-			end
-		end
-
 		vim.api.nvim_create_autocmd("LspDetach", {
 			group = vim.api.nvim_create_augroup("ratna", { clear = true }),
 			callback = function(event2)
@@ -51,4 +42,41 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 	group = highlight_group,
 	pattern = "*",
+})
+
+-- diagnostic config
+vim.diagnostic.config({
+	severity_sort = true,
+	jump = { float = true },
+	float = { border = "rounded", source = "if_many" },
+	underline = { severity = vim.diagnostic.severity.ERROR },
+	signs = vim.g.have_nerd_font and {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+		},
+	} or {},
+	virtual_text = {
+		prefix = "●",
+		source = "if_many",
+		spacing = 2,
+		format = function(diagnostic)
+			local diagnostic_message = {
+				[vim.diagnostic.severity.ERROR] = diagnostic.message,
+				[vim.diagnostic.severity.WARN] = diagnostic.message,
+				[vim.diagnostic.severity.INFO] = diagnostic.message,
+				[vim.diagnostic.severity.HINT] = diagnostic.message,
+			}
+			return diagnostic_message[diagnostic.severity]
+		end,
+	},
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "qf", "help" },
+	callback = function()
+		vim.keymap.set("n", "<Esc>", ":q<CR>", { buffer = true, silent = true })
+	end,
 })

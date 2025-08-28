@@ -14,8 +14,8 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- yank into  system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', opts)
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', opts)
+vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y', opts)
+vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p', opts)
 
 vim.keymap.set("n", "<C-c>", "<cmd> w <CR>", opts)
 -- save file without auto-formatting
@@ -61,6 +61,14 @@ vim.keymap.set("v", ">", ">gv", opts)
 vim.keymap.set("v", "p", '"_dP', opts)
 
 vim.keymap.set("n", "<leader>v", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", "<leader>t", function()
+	vim.diagnostic.setqflist({ open = false })
+end, opts)
 
-vim.keymap.set("n", "[t", "<cmd>cnext<CR>")
-vim.keymap.set("n", "]t", "<cmd>cprev<CR>")
+vim.keymap.set(
+	"n",
+	"[q",
+	"<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>",
+	{ desc = "go to next in quickfix list", silent = true }
+)
+vim.keymap.set("n", "]q", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>")

@@ -67,7 +67,6 @@ return {
 			})
 		end, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-		vim.keymap.set("n", "<leader>t", builtin.diagnostics)
 		vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find)
 		vim.keymap.set("n", "<leader>j", function()
 			builtin.live_grep({
