@@ -18,8 +18,6 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y', opts)
 vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p', opts)
 
 vim.keymap.set("n", "<C-c>", "<cmd> w <CR>", opts)
--- save file without auto-formatting
-vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", opts)
 
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
 -- mostly for go
@@ -37,18 +35,7 @@ vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
 -- Buffers
-vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
 vim.keymap.set("n", "<leader>d", ":bdelete!<CR>", opts) -- close buffer
-vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts) -- new buffer
-
--- Navigate between splits
-
--- Tabs
-vim.keymap.set("n", "<leader>to", ":tabnew<CR>", opts) -- open new tab
-vim.keymap.set("n", "<leader>tx", ":tabclose<CR>", opts) -- close current tab
-vim.keymap.set("n", "<leader>tn", ":tabn<CR>", opts) --  go to next tab
-vim.keymap.set("n", "<leader>tp", ":tabp<CR>", opts) --  go to previous tab
 
 -- Toggle line wrapping
 vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
@@ -60,7 +47,19 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
-vim.keymap.set("n", "<leader>v", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ float = true, count = 1 })
+end, opts)
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ float = true, count = -1 })
+end, opts)
+
+vim.keymap.set(
+	"n",
+	"<leader>v",
+	vim.diagnostic.open_float,
+	{ desc = "Open floating diagnostic message", silent = true, noremap = true }
+)
 vim.keymap.set("n", "<leader>t", function()
 	vim.diagnostic.setqflist({ open = false })
 end, opts)
@@ -71,4 +70,4 @@ vim.keymap.set(
 	"<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>",
 	{ desc = "go to next in quickfix list", silent = true }
 )
-vim.keymap.set("n", "]q", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>")
+vim.keymap.set("n", "]q", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>", opts)
