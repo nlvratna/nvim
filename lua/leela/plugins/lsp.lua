@@ -8,6 +8,37 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(event)
+					local map = function(keys, func, desc, mode)
+						mode = mode or "n"
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+					end
+
+					local builtin = require("telescope.builtin")
+					map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+					map("gr", vim.lsp.buf.references, "Show References")
+					map("sd", vim.lsp.buf.document_symbol, "")
+					map("<leader>l", builtin.lsp_workspace_symbols, "")
+					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+					map("<leader>o", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+					map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
+
+					vim.api.nvim_create_autocmd("LspDetach", {
+						group = vim.api.nvim_create_augroup("ratna", { clear = true }),
+						callback = function(event2)
+							vim.lsp.buf.clear_references()
+							vim.api.nvim_clear_autocmds({ group = "ratna", buffer = event2.buf })
+						end,
+					})
+				end,
+			})
+
+			vim.filetype.add({
+				extension = {
+					templ = "templ",
+				},
+			})
 			local original_capabilities = vim.lsp.protocol.make_client_capabilities()
 			local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
 

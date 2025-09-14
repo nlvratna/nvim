@@ -1,40 +1,42 @@
-return {}
--- return {
--- 	"ThePrimeagen/harpoon",
--- 	branch = "harpoon2",
--- 	-- lazy = true,
--- 	event = "VimEnter",
--- 	dependencies = { "nvim-lua/plenary.nvim" },
--- 	config = function()
--- 		local harpoon = require("harpoon"):setup()
--- 		-- local extensions = require("harpoon.extensions")
--- 		vim.keymap.set("n", "<leader>n", function()
--- 			harpoon:list():add()
--- 		end)
--- 		vim.keymap.set("n", "<leader>m", function()
--- 			harpoon.ui:toggle_quick_menu(harpoon:list())
--- 		end)
---
--- 		vim.keymap.set("n", "<C-j>", function()
--- 			harpoon:list():select(1)
--- 		end)
--- 		vim.keymap.set("n", "<C-k>", function()
--- 			harpoon:list():select(2)
--- 		end)
--- 		vim.keymap.set("n", "<C-n>", function()
--- 			harpoon:list():select(3)
--- 		end)
--- 		vim.keymap.set("n", "<C-m>", function()
--- 			harpoon:list():select(4)
--- 		end)
--- 		vim.keymap.set("n", "<leader>l", function()
--- 			harpoon:list():select(1)
--- 		end)
--- 		vim.keymap.set("n", "<leader>l", function()
--- 			harpoon:list():next()
--- 		end)
--- 		vim.keymap.set("n", "<leader>;", function()
--- 			harpoon:list():prev()
--- 		end)
--- 	end,
--- }
+return {
+	"ThePrimeagen/harpoon",
+	branch = "harpoon2",
+	opts = {
+		menu = {
+			width = vim.api.nvim_win_get_width(0) - 4,
+		},
+		settings = {
+			save_on_toggle = true,
+		},
+	},
+	keys = function()
+		local keys = {
+			{
+				"<M-a>",
+				function()
+					require("harpoon"):list():add()
+				end,
+				desc = "Harpoon File",
+			},
+			{
+				"<M-q>",
+				function()
+					local harpoon = require("harpoon")
+					harpoon.ui:toggle_quick_menu(harpoon:list())
+				end,
+				desc = "Harpoon Quick Menu",
+			},
+		}
+
+		for i = 1, 5 do
+			table.insert(keys, {
+				"<leader>" .. i,
+				function()
+					require("harpoon"):list():select(i)
+				end,
+				desc = "Harpoon to File " .. i,
+			})
+		end
+		return keys
+	end,
+}
