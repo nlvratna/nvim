@@ -45,10 +45,10 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
-vim.keymap.set("n", "<C-j>", function()
+vim.keymap.set("n", "[d", function()
 	vim.diagnostic.jump({ float = true, count = 1 })
 end, opts)
-vim.keymap.set("n", "<C-n>", function()
+vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ float = true, count = -1 })
 end, opts)
 
@@ -64,9 +64,9 @@ end, opts)
 
 vim.keymap.set(
 	"n",
-	"<C-k>",
+	"[q",
 	"<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>",
 	{ desc = "go to next in quickfix list", silent = true }
 )
-vim.keymap.set("n", "<C-m>", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>", opts)
+vim.keymap.set("n", "]q", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>", opts)
 vim.keymap.set("n", "<C-c>", "<cmd> cclose <CR>", opts)
