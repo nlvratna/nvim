@@ -3,9 +3,7 @@ return {
 	version = "1.*",
 	event = "InsertEnter",
 	dependencies = {
-		{
-			"L3MON4D3/LuaSnip",
-		},
+		{ "rafamadriz/friendly-snippets" },
 
 		{
 			"folke/lazydev.nvim",
@@ -22,7 +20,6 @@ return {
 		keymap = {
 			preset = "default",
 		},
-		snippets = { preset = "luasnip" },
 		appearance = {
 			use_nvim_cmp_as_default = true,
 			nerd_font_variant = "mono",
@@ -68,6 +65,11 @@ return {
 		sources = {
 			default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 			providers = {
+				snippets = {
+					opts = {
+						search_paths = { "~/.config/nvim/lua/leela/core/snippets/vscode" },
+					},
+				},
 				lazydev = {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",
