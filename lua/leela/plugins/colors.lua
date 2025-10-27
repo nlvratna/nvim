@@ -22,7 +22,6 @@ return {
 					-- BlinkCmpDoc = { bg = "highlight_low" },
 				},
 			})
-
 			vim.cmd("colorscheme rose-pine")
 			-- vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#191724" }) future reference
 		end,

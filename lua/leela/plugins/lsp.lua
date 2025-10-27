@@ -43,6 +43,12 @@ return {
 			local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
 
 			local servers = {
+				cmd = {
+					"clangd",
+					"--completion-style=detailed",
+					"--function-arg-placeholders=0",
+					"--completion-all-parameters=0",
+				},
 				gopls = {
 					analyses = {
 						unusedparams = true,

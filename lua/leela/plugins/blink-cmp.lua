@@ -31,6 +31,11 @@ return {
 					enabled = false,
 				},
 			},
+			ghost_text = {
+				enabled = false,
+				show_with_selection = false,
+				show_without_menu = false,
+			},
 			documentation = {
 				auto_show = true,
 				treesitter_highlighting = true,

@@ -58,9 +58,7 @@ vim.keymap.set(
 	vim.diagnostic.open_float,
 	{ desc = "Open floating diagnostic message", silent = true, noremap = true }
 )
-vim.keymap.set("n", "<leader>t", function()
-	vim.diagnostic.setqflist({ open = false })
-end, opts)
+vim.keymap.set("n", "<leader>t", vim.diagnostic.setqflist, opts)
 
 vim.keymap.set(
 	"n",
