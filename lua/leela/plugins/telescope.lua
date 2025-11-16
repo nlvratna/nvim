@@ -65,11 +65,13 @@ return {
 		end, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find)
-		vim.keymap.set("n", "<leader>j", function()
-			builtin.live_grep({
-				grep_open_files = true,
-				prompt_title = "Live Grep in Open Files",
-			})
-		end, { desc = "Grep in Open files" })
+		vim.keymap.set("n", "<leader>j", builtin.lsp_document_symbols, { desc = "Search for symbols in the document" })
+
+		-- vim.keymap.set("n", "<leader>j", function()
+		-- 	builtin.live_grep({
+		-- 		grep_open_files = true,
+		-- 		prompt_title = "Live Grep in Open Files",
+		-- 	})
+		-- end, { desc = "Grep in Open files" })
 	end,
 }
