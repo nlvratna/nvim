@@ -3,8 +3,10 @@ return {
 	dependencies = {
 		"saghen/blink.cmp",
 		"mason-org/mason.nvim",
+		"mason-org/mason-lspconfig.nvim",
 	},
 	config = function()
+		require("mason").setup()
 		-- diagnostic config
 		vim.diagnostic.config({
 			severity_sort = true,
@@ -48,6 +50,8 @@ return {
 				})
 			end,
 		})
+
+		require("mason-lspconfig").setup()
 
 		vim.filetype.add({
 			extension = {
@@ -133,13 +137,17 @@ return {
 		--		},
 		--	},
 		--}
-
-		-- local data = vim.fn.stdpath("data")
-
-		vim.lsp.enable("lua_ls")
-		vim.lsp.enable("zls")
-		vim.lsp.config("zls", { settings = { zls = { enable_argument_placeholders = false } } }) -- why this only works this way?
-
-		require("mason").setup()
+		-- vim.lsp.config("zls", { settings = { zls = { enable_argument_placeholders = false } } }) -- why this only works this way?
+		-- vim.lsp.config("gopls", {
+		-- 	settings = {
+		-- 		gopls = {
+		-- 			analyses = {
+		-- 				unusedparams = true,
+		-- 			},
+		-- 			staticcheck = true,
+		-- 			gofumpt = true,
+		-- 		},
+		-- 	},
+		-- })
 	end,
 }

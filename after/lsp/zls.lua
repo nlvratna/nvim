@@ -1,10 +1,5 @@
----@type vim.lsp.Config
 return {
-	cmd = { "zls" },
-	filetypes = { "zig", "zir" },
-	root_markers = { "zls.json", "build.zig", ".git" },
-	workspace_required = false,
-	settings = {
+	settings = { --this settings doesn't get applied to zls
 		zls = {
 			enable_argument_placeholders = false,
 		},
