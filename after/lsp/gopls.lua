@@ -3,8 +3,8 @@ return {
 		gopls = {
 			analyses = {
 				unusedparams = true,
+				ST100 = false,
 			},
-			staticcheck = true,
 			gofumpt = true,
 		},
 	},
