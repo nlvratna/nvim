@@ -1,6 +1,6 @@
 return {
-	cmd = {
-		"clangd",
-		"--function-arg-placeholders=false",
-	},
+  cmd = {
+    "clangd",
+    "--function-arg-placeholders=false",
+  },
 }

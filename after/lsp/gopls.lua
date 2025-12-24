@@ -1,11 +1,11 @@
 return {
-	settings = {
-		gopls = {
-			analyses = {
-				unusedparams = true,
-				ST100 = false,
-			},
-			gofumpt = true,
-		},
-	},
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+        ST100 = false,
+      },
+      gofumpt = true,
+    },
+  },
 }
