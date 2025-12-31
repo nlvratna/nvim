@@ -11,7 +11,7 @@ return {
         },
         palette = {
           main = {
-            base = "#000000",
+            base = "none",
           },
         },
         highlight_groups = {
