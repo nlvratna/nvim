@@ -2,8 +2,8 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "saghen/blink.cmp",
-    "mason-org/mason.nvim",
-    "mason-org/mason-lspconfig.nvim",
+    -- "mason-org/mason.nvim",
+    -- "mason-org/mason-lspconfig.nvim",
   },
   config = function()
     require("mason").setup()
@@ -52,13 +52,6 @@ return {
       end,
     })
 
-    require("mason-lspconfig").setup()
-
-    -- I don't know need this?
-    -- local original_capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
-    -- vim.lsp.config("*", {
-    -- 	capabilities = { capabilities },
-    -- })
+    -- require("mason-lspconfig").setup()
   end,
 }

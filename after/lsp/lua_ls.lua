@@ -1,4 +1,5 @@
 return {
+  cmd = { "lua-language-server" },
   settings = {
     Lua = {
       completion = {
@@ -19,5 +20,5 @@ return {
       },
     },
   },
-  -- vim.lsp.enable("lua_ls"),
+  vim.lsp.enable("lua_ls"),
 }
