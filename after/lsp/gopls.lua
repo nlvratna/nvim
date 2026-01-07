@@ -8,4 +8,5 @@ return {
       gofumpt = true,
     },
   },
+  vim.lsp.enable("gopls"),
 }
