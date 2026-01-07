@@ -1,3 +1,24 @@
+---@param server string
+function StartLsp(server)
+  vim.lsp.enable(server)
+end
+
+--https://www.reddit.com/r/neovim/comments/1jw0zav/psa_heres_a_quick_guide_to_using_the_new_built_in/
+-- local function setup_lsp()
+--   local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
+--   local lsp_servers = {}
+--
+--   if vim.fn.isdirectory(lsp_dir) == 1 then
+--     for _, file in ipairs(vim.fn.readdir(lsp_dir)) do
+--       if file:match("%.lua$") and file ~= "init.lua" then
+--         local server_name = file:gsub("%.lua$", "")
+--         table.insert(lsp_servers, server_name)
+--       end
+--     end
+--   end
+--
+--   vim.lsp.enable(lsp_servers)
+-- end
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -50,20 +71,12 @@ return {
 
     vim.api.nvim_create_autocmd("LspDetach", {
       group = lsp_detach_group,
-      callback = function(event)
+      callback = function()
         vim.lsp.buf.clear_references()
       end,
     })
 
-    --https://www.reddit.com/r/neovim/comments/1jw0zav/psa_heres_a_quick_guide_to_using_the_new_built_in/
-    local lsp_configs = {}
-
-    for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
-      local server_name = vim.fn.fnamemodify(f, ":t:r")
-      table.insert(lsp_configs, server_name)
-    end
-
-    vim.lsp.enable(lsp_configs)
-    -- require("mason-lspconfig").setup()
+    -- setup_lsp()
   end,
+  -- require("mason-lspconfig").setup()
 }
