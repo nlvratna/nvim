@@ -6,7 +6,7 @@ return {
     -- "mason-org/mason-lspconfig.nvim",
   },
   config = function()
-    require("mason").setup()
+    -- require("mason").setup()
 
     -- diagnostic config
     vim.diagnostic.config({
