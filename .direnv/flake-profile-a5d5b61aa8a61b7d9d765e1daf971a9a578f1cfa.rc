@@ -41,7 +41,7 @@ NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
 NIX_HARDENING_ENABLE='bindnow format fortify fortify3 libcxxhardeningextensive libcxxhardeningfast pic relro stackclashprotection stackprotector strictoverflow zerocallusedregs'
 export NIX_HARDENING_ENABLE
-NIX_LDFLAGS='-rpath /home/leela/dotfiles/nvim/outputs/out/lib  -L/nix/store/r3gyc06qnh09sw77pwk5fn7mxyf7g5yj-stylua-2.3.1/lib -L/nix/store/r3gyc06qnh09sw77pwk5fn7mxyf7g5yj-stylua-2.3.1/lib'
+NIX_LDFLAGS='-rpath /home/leela/nixos/dotfiles/nvim/outputs/out/lib  -L/nix/store/r3gyc06qnh09sw77pwk5fn7mxyf7g5yj-stylua-2.3.1/lib -L/nix/store/r3gyc06qnh09sw77pwk5fn7mxyf7g5yj-stylua-2.3.1/lib'
 export NIX_LDFLAGS
 NIX_NO_SELF_RPATH='1'
 NIX_STORE='/nix/store'
@@ -134,7 +134,7 @@ name='nix-shell-env'
 export name
 nativeBuildInputs='/nix/store/2fldvs2bv3gn3zr13pp5smz9haslw0ns-lua-language-server-3.16.1 /nix/store/r3gyc06qnh09sw77pwk5fn7mxyf7g5yj-stylua-2.3.1'
 export nativeBuildInputs
-out='/home/leela/dotfiles/nvim/outputs/out'
+out='/home/leela/nixos/dotfiles/nvim/outputs/out'
 export out
 outputBin='out'
 outputDev='out'
@@ -165,7 +165,7 @@ preConfigurePhases=' updateAutotoolsGnuConfigScriptsPhase'
 declare -a preFixupHooks=('_moveToShare' '_multioutDocs' '_multioutDevs' )
 preferLocalBuild='1'
 export preferLocalBuild
-prefix='/home/leela/dotfiles/nvim/outputs/out'
+prefix='/home/leela/nixos/dotfiles/nvim/outputs/out'
 declare -a propagatedBuildDepFiles=('propagated-build-build-deps' 'propagated-native-build-inputs' 'propagated-build-target-deps' )
 propagatedBuildInputs=''
 export propagatedBuildInputs
