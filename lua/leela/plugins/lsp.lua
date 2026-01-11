@@ -1,28 +1,12 @@
---https://www.reddit.com/r/neovim/comments/1jw0zav/psa_heres_a_quick_guide_to_using_the_new_built_in/
--- local function setup_lsp()
---   local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
---   local lsp_servers = {}
---
---   if vim.fn.isdirectory(lsp_dir) == 1 then
---     for _, file in ipairs(vim.fn.readdir(lsp_dir)) do
---       if file:match("%.lua$") and file ~= "init.lua" then
---         local server_name = file:gsub("%.lua$", "")
---         table.insert(lsp_servers, server_name)
---       end
---     end
---   end
---
---   vim.lsp.enable(lsp_servers)
--- end
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "saghen/blink.cmp",
-    -- "mason-org/mason.nvim",
-    -- "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
   },
   config = function()
-    -- require("mason").setup()
+    require("mason").setup()
 
     -- diagnostic config
     vim.diagnostic.config({
@@ -70,8 +54,23 @@ return {
         vim.lsp.buf.clear_references()
       end,
     })
-
-    -- setup_lsp()
+    require("mason-lspconfig").setup()
   end,
-  -- require("mason-lspconfig").setup()
 }
+
+--https://www.reddit.com/r/neovim/comments/1jw0zav/psa_heres_a_quick_guide_to_using_the_new_built_in/
+-- local function setup_lsp()
+--   local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
+--   local lsp_servers = {}
+--
+--   if vim.fn.isdirectory(lsp_dir) == 1 then
+--     for _, file in ipairs(vim.fn.readdir(lsp_dir)) do
+--       if file:match("%.lua$") and file ~= "init.lua" then
+--         local server_name = file:gsub("%.lua$", "")
+--         table.insert(lsp_servers, server_name)
+--       end
+--     end
+--   end
+--
+--   vim.lsp.enable(lsp_servers)
+-- end
