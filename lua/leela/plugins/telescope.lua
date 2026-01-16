@@ -13,6 +13,7 @@ return {
     { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
   config = function()
+    require("leela.workspace").setup({})
     require("telescope").setup({
       defaults = {
         preview = false,
@@ -70,6 +71,8 @@ return {
       builtin.lsp_document_symbols,
       { desc = "Search for symbols in the document" }
     )
+
+    vim.keymap.set("n", "<leader>w", ":WorkspaceSwitch<CR>", { silent = true })
 
     -- vim.keymap.set("n", "<leader>j", function()
     -- 	builtin.live_grep({

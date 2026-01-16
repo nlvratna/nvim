@@ -17,11 +17,11 @@ local action_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
 local uv = vim.loop or vim.uv
 
--- local M = {}
+local M = {}
 
 local config = {}
 
-local setup = function(opts)
+M.setup = function(opts)
   local home = assert(uv.os_homedir())
   local defaults = {
     dir = vim.fn.stdpath("run") .. "/sessions/",
@@ -32,6 +32,10 @@ local setup = function(opts)
     hidden = false,
   }
   config = vim.tbl_deep_extend("force", {}, defaults, opts or {})
+
+  vim.api.nvim_create_user_command("WorkspaceSwitch", function()
+    M.switch_workspace()
+  end, {})
 end
 
 --https://github.com/folke/persistence.nvim/blob/main/lua/persistence/init.lua
@@ -67,7 +71,7 @@ local function restore()
   end
 end
 
-local switch_workspace = function(opts)
+M.switch_workspace = function(opts)
   opts = opts or {}
   opts = vim.tbl_deep_extend("force", config, opts)
 
@@ -162,9 +166,7 @@ local switch_workspace = function(opts)
     :find()
 end
 
-vim.api.nvim_create_user_command("WorkspaceSwitch", function()
-  setup()
-  switch_workspace()
-end, {})
-vim.keymap.set("n", "<leader>w", ":WorkspaceSwitch<CR>", { silent = true })
+return M
+
 --if I create a global scratch buffer create a autocmd that grabs the buffer number of that scratch and doesn't delete it contents
+-- to listen to the command use the WorkspaceSwitch in pattern
