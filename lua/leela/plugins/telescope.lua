@@ -64,13 +64,7 @@ return {
     end, { desc = "[S]earch current [W]ord" })
     vim.keymap.set("n", "<leader>gg", builtin.grep_string)
     vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-    vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find)
-    vim.keymap.set(
-      "n",
-      "<leader>j",
-      builtin.lsp_document_symbols,
-      { desc = "Search for symbols in the document" }
-    )
+    vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find) --I might not need this too
 
     vim.keymap.set("n", "<leader>w", ":WorkspaceSwitch<CR>", { silent = true })
 
