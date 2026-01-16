@@ -85,7 +85,7 @@ return {
 
           if not parser_installed then
             -- If not installed, install parser synchronously
-            require("nvim-treesitter").install({ parser_name }):wait(30000)
+            require("nvim-treesitter").install({ parser_name }):wait(20000)
           end
 
           -- let's check again
@@ -99,15 +99,15 @@ return {
       })
     end,
   },
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "BufRead",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      event = "BufRead",
-    },
-    opts = {
-      multiwindow = true,
-    },
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-context",
+  --   event = "BufRead",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     event = "BufRead",
+  --   },
+  --   opts = {
+  --     multiwindow = true,
+  --   },
+  -- },
 }

@@ -46,25 +46,25 @@ vim.keymap.set("v", ">", ">gv", opts)
 vim.keymap.set("v", "p", '"_dP', opts)
 
 vim.keymap.set("n", "[d", function()
-	vim.diagnostic.jump({ float = true, count = 1 })
+  vim.diagnostic.jump({ float = true, count = 1 })
 end, opts)
 vim.keymap.set("n", "]d", function()
-	vim.diagnostic.jump({ float = true, count = -1 })
+  vim.diagnostic.jump({ float = true, count = -1 })
 end, opts)
 
 vim.keymap.set(
-	"n",
-	"<leader>v",
-	vim.diagnostic.open_float,
-	{ desc = "Open floating diagnostic message", silent = true, noremap = true }
+  "n",
+  "<leader>v",
+  vim.diagnostic.open_float,
+  { desc = "Open floating diagnostic message", silent = true, noremap = true }
 )
 vim.keymap.set("n", "<leader>t", vim.diagnostic.setqflist, opts)
 
 vim.keymap.set(
-	"n",
-	"[q",
-	"<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>",
-	{ desc = "go to next in quickfix list", silent = true }
+  "n",
+  "[q",
+  "<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>",
+  { desc = "go to next in quickfix list", silent = true }
 )
 vim.keymap.set("n", "]q", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>", opts)
 vim.keymap.set("n", "<C-c>", "<cmd> cclose <CR>", opts)

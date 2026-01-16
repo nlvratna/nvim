@@ -30,11 +30,12 @@ return {
     "folke/tokyonight.nvim",
     config = function()
       require("tokyonight").setup({
-        transparent = true,
+        -- transparent = true,
         style = "night",
         styles = {
           comments = { italic = false },
           keywords = { italic = false },
+          functions = {},
         },
         on_colors = function(c)
           c.bg = "none"

@@ -60,8 +60,8 @@ return {
       builtin.grep_string({
         search = vim.fn.input({ prompt = "grep > " }),
       })
-      vim.keymap.set("n", "<leader>gg", builtin.grep_string)
     end, { desc = "[S]earch current [W]ord" })
+    vim.keymap.set("n", "<leader>gg", builtin.grep_string)
     vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find)
     vim.keymap.set(
