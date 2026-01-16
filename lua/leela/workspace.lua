@@ -32,10 +32,6 @@ local setup = function(opts)
     hidden = false,
   }
   config = vim.tbl_deep_extend("force", {}, defaults, opts or {})
-
-  vim.api.nvim_create_user_command("WorkspaceSwitch", function()
-    switch_workspace()
-  end, {})
 end
 
 --https://github.com/folke/persistence.nvim/blob/main/lua/persistence/init.lua
