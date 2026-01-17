@@ -33,7 +33,13 @@ M.setup = function(opts)
   }
   config = vim.tbl_deep_extend("force", {}, defaults, opts or {})
 
-  vim.api.nvim_create_user_command("WorkspaceSwitch", function()
+  vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = vim.api.nvim_create_augroup("WorkspaceSwitch", { clear = true }),
+    callback = function()
+      M.switch_workspace()
+    end,
+  })
+  vim.api.nvim_create_user_command("WorkspaceSwitch", function(_)
     M.switch_workspace()
   end, {})
 end
@@ -61,10 +67,10 @@ end
 local function save()
   local file = file_name()
   vim.cmd("mks! " .. vim.fn.fnameescape(file))
-  cleanup()
 end
 
 local function restore()
+  cleanup()
   local file = file_name()
   if file and vim.fn.filereadable(file) ~= 0 then
     vim.cmd("silent! source " .. vim.fn.fnameescape(file))
@@ -167,6 +173,5 @@ M.switch_workspace = function(opts)
 end
 
 return M
-
 --if I create a global scratch buffer create a autocmd that grabs the buffer number of that scratch and doesn't delete it contents
--- to listen to the command use the WorkspaceSwitch in pattern
+--pattern in autocmd is the cmd("WorkspaceSwitch") that is being called
