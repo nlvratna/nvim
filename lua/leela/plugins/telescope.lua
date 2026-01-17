@@ -3,7 +3,7 @@ return {
   event = "VimEnter",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { -- If encountering errors, see telescope-fzf-native README for installation instructions
+    {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
       cond = function()
@@ -13,7 +13,6 @@ return {
     { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
   config = function()
-    require("leela.workspace").setup({})
     require("telescope").setup({
       defaults = {
         preview = false,
@@ -65,8 +64,6 @@ return {
     vim.keymap.set("n", "<leader>gg", builtin.grep_string)
     vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find) --I might not need this too
-
-    vim.keymap.set("n", "<leader>w", ":WorkspaceSwitch<CR>", { silent = true })
 
     -- vim.keymap.set("n", "<leader>j", function()
     -- 	builtin.live_grep({

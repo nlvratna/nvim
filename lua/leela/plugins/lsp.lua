@@ -1,4 +1,5 @@
 return {
+  --I might remove this
   "neovim/nvim-lspconfig",
   dependencies = {
     "saghen/blink.cmp",

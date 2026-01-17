@@ -62,9 +62,9 @@ vim.keymap.set("n", "<leader>t", vim.diagnostic.setqflist, opts)
 
 vim.keymap.set(
   "n",
-  "[q",
+  "[[",
   "<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>",
   { desc = "go to next in quickfix list", silent = true }
 )
-vim.keymap.set("n", "]q", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>", opts)
+vim.keymap.set("n", "]]", "<Cmd>try | cprevious | catch | clast | catch | endtry<CR>", opts)
 vim.keymap.set("n", "<C-c>", "<cmd> cclose <CR>", opts)

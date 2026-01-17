@@ -10,6 +10,7 @@ These are similar projects to this:
 - auto-session: https://github.com/rmagatti/auto-session
 ]]
 
+--cool but not really that useful for me over tmux
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local actions = require("telescope.actions")
@@ -36,7 +37,7 @@ M.setup = function(opts)
   vim.api.nvim_create_autocmd("VimLeavePre", {
     group = vim.api.nvim_create_augroup("WorkspaceSwitch", { clear = true }),
     callback = function()
-      M.switch_workspace()
+      M.save()
     end,
   })
   vim.api.nvim_create_user_command("WorkspaceSwitch", function(_)
@@ -173,5 +174,3 @@ M.switch_workspace = function(opts)
 end
 
 return M
---if I create a global scratch buffer create a autocmd that grabs the buffer number of that scratch and doesn't delete it contents
---pattern in autocmd is the cmd("WorkspaceSwitch") that is being called
