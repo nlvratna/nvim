@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
   version = "1.*",
-  event = "InsertEnter",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     { "rafamadriz/friendly-snippets" },
 
@@ -26,6 +26,9 @@ return {
     },
     -- signature = { enabled = true },
     completion = {
+      trigger = {
+        show_on_keyboard = false,
+      },
       accept = {
         auto_brackets = {
           enabled = false,
@@ -42,6 +45,7 @@ return {
       },
 
       menu = {
+        auto_show = false,
         -- border = "rounded",
         draw = {
           columns = {
