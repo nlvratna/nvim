@@ -26,9 +26,6 @@ return {
     },
     -- signature = { enabled = true },
     completion = {
-      trigger = {
-        show_on_keyboard = false,
-      },
       accept = {
         auto_brackets = {
           enabled = false,
@@ -46,6 +43,7 @@ return {
 
       menu = {
         auto_show = false,
+        -- auto_show = true,
         -- border = "rounded",
         draw = {
           columns = {
