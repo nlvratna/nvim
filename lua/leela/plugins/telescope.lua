@@ -20,7 +20,14 @@ return {
       pickers = {
         find_files = {
           hidden = true,
-          file_ignore_patterns = { "node_modules", ".git", ".venv", "target", ".zig-cache" },
+          file_ignore_patterns = {
+            "node_modules",
+            ".git",
+            ".venv/",
+            "target",
+            ".zig-cache/*",
+            "zig-out/",
+          },
           no_ignore = true,
         },
         lsp_references = {
