@@ -1,6 +1,6 @@
 ---@brief
 ---
---src: https://github.com/neovim/nvim-lspconfig/lsp/rust_analyzer.lua
+---src: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/rust_analyzer.lua
 --- https://github.com/rust-lang/rust-analyzer
 ---
 --- rust-analyzer (aka rls 2.0), a language server for Rust

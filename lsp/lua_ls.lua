@@ -1,4 +1,4 @@
---src: https://github.com/neovim/nvim-lspconfig/lsp/lua_ls.lua
+--src: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/lua_ls.lua
 local root_markers1 = {
   ".emmyrc.json",
   ".luarc.json",

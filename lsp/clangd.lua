@@ -1,5 +1,5 @@
 ---@brief
---- src:https://github.com/neovim/nvim-lspconfig/lsp/clangd.lua"
+--- src:https://github.com/neovim/nvim-lspconfig/blob/master/lsp/clangd.lua"
 --- https://clangd.llvm.org/installation.html
 ---
 --- - **NOTE:** Clang >= 11 is recommended! See [#23](https://github.com/neovim/nvim-lspconfig/issues/23).

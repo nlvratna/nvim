@@ -1,5 +1,5 @@
 ---@brief
----src: https://github.com/neovim/nvim-lspconfig/lsp/zls.lua
+---src: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/zls.lua
 --- https://github.com/zigtools/zls
 ---
 --- Zig LSP implementation + Zig Language Server
