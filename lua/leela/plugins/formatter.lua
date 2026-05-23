@@ -6,7 +6,7 @@ return {
 
     conform.setup({
       formatters_by_ft = {
-        go = { "gofumpt" },
+        -- go = { "gofumpt" },
         javascript = { "prettier" },
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
@@ -19,6 +19,7 @@ return {
         lua = { "stylua" },
         python = { "black" },
         java = { "google-java-format" },
+        odin = { "odinfmt" },
       },
       format_on_save = {
         lsp_fallback = true,

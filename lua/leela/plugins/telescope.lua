@@ -69,7 +69,7 @@ return {
       })
     end, { desc = "[S]earch current [W]ord" })
     vim.keymap.set("n", "<leader>gg", builtin.grep_string)
-    vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+    vim.keymap.set("n", "<leader>j", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find) --I might not need this too
 
     -- vim.keymap.set("n", "<leader>j", function()

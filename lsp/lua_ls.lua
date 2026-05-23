@@ -31,8 +31,6 @@ return {
     workspace = {
       checkThirdParty = true,
       library = {
-        -- "${3rd}/love2d/library",
-        "${3rd}/luv/library",
         unpack(vim.api.nvim_get_runtime_file("", true)),
       },
     },

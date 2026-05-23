@@ -1,8 +1,9 @@
 local lsp_attach_group = vim.api.nvim_create_augroup("lsp-attach", { clear = true })
 local lsp_detach_group = vim.api.nvim_create_augroup("lsp-detach", { clear = true })
-local lsp_start = vim.api.nvim_create_augroup("lsp-start", { clear = true })
+-- local lsp_start = vim.api.nvim_create_augroup("lsp-start", { clear = true })
 
 return {
+  "neovim/nvim-lspconfig",
 
   vim.diagnostic.config({
     severity_sort = true,
@@ -21,13 +22,13 @@ return {
     virtual_text = false,
   }),
 
-  vim.api.nvim_create_autocmd("FileType", {
-    group = lsp_start,
-    callback = function()
-      vim.cmd("silent! lsp enable")
-    end,
-  }),
-
+  -- vim.api.nvim_create_autocmd("FileType", {
+  --   group = lsp_start,
+  --   callback = function()
+  --     vim.cmd("silent! lsp enable")
+  --   end,
+  -- }),
+  --
   vim.api.nvim_create_autocmd("LspAttach", {
     group = lsp_attach_group,
     callback = function(event)
