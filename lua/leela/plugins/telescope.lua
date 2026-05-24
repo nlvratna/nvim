@@ -1,6 +1,5 @@
 return {
   "nvim-telescope/telescope.nvim",
-  event = "VimEnter",
   dependencies = {
     "nvim-lua/plenary.nvim",
     {
@@ -10,7 +9,6 @@ return {
         return vim.fn.executable("make") == 1
       end,
     },
-    { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
   },
   config = function()
     require("telescope").setup({
@@ -71,12 +69,5 @@ return {
     vim.keymap.set("n", "<leader>gg", builtin.grep_string)
     vim.keymap.set("n", "<leader>j", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set("n", "<leader>k", builtin.current_buffer_fuzzy_find) --I might not need this too
-
-    -- vim.keymap.set("n", "<leader>j", function()
-    -- 	builtin.live_grep({
-    -- 		grep_open_files = true,
-    -- 		prompt_title = "Live Grep in Open Files",
-    -- 	})
-    -- end, { desc = "Grep in Open files" })
   end,
 }

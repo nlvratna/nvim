@@ -20,6 +20,7 @@ return {
     keymap = {
       preset = "default",
     },
+
     appearance = {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = "mono",
@@ -42,8 +43,8 @@ return {
       },
 
       menu = {
-        -- auto_show = false,
-        auto_show = true,
+        auto_show = false,
+        -- auto_show = true,
         -- border = "rounded",
         draw = {
           columns = {

@@ -1,10 +1,8 @@
 local lsp_attach_group = vim.api.nvim_create_augroup("lsp-attach", { clear = true })
 local lsp_detach_group = vim.api.nvim_create_augroup("lsp-detach", { clear = true })
--- local lsp_start = vim.api.nvim_create_augroup("lsp-start", { clear = true })
+local lsp_start = vim.api.nvim_create_augroup("lsp-start", { clear = true })
 
 return {
-  "neovim/nvim-lspconfig",
-
   vim.diagnostic.config({
     severity_sort = true,
     jump = { float = true },
@@ -20,15 +18,16 @@ return {
       },
     } or {},
     virtual_text = false,
+    update_in_insert = false,
   }),
 
-  -- vim.api.nvim_create_autocmd("FileType", {
-  --   group = lsp_start,
-  --   callback = function()
-  --     vim.cmd("silent! lsp enable")
-  --   end,
-  -- }),
-  --
+  vim.api.nvim_create_autocmd("FileType", {
+    group = lsp_start,
+    callback = function()
+      vim.cmd("silent! lsp enable")
+    end,
+  }),
+
   vim.api.nvim_create_autocmd("LspAttach", {
     group = lsp_attach_group,
     callback = function(event)
@@ -37,12 +36,12 @@ return {
         vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
       end
 
-      local builtin = require("telescope.builtin")
+      --local builtin = require("telescope.builtin")
       map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
       map("gr", vim.lsp.buf.references, "Show References")
       map("sd", vim.lsp.buf.document_symbol, "")
-      map("<leader>l", builtin.lsp_workspace_symbols, "")
-      map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+      --map("<leader>l", builtin.lsp_workspace_symbols, "")
+      -- map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
       map("<leader>o", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
       map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
     end,
@@ -58,11 +57,11 @@ return {
 
 -- return {
 --   -- "neovim/nvim-lspconfig",
---   dependencies = {
---   "saghen/blink.cmp",
---     -- "mason-org/mason.nvim",
---     -- "mason-org/mason-lspconfig.nvim",
---   },
+--   -- dependencies = {
+--   --   -- "saghen/blink.cmp",
+--   --   -- "mason-org/mason.nvim",
+--   --   -- "mason-org/mason-lspconfig.nvim",
+--   -- },
 --   config = function()
 --     -- require("mason").setup()
 --
@@ -82,10 +81,11 @@ return {
 --         },
 --       } or {},
 --       virtual_text = false,
+--       update_in_insert = false,
 --     })
 --
---     local lsp_attach_group = vim.api.nvim_create_augroup("lsp-attach", { clear = true })
---     local lsp_detach_group = vim.api.nvim_create_augroup("lsp-detach", { clear = true })
+--     -- local lsp_attach_group = vim.api.nvim_create_augroup("lsp-attach", { clear = true })
+--     -- local lsp_detach_group = vim.api.nvim_create_augroup("lsp-detach", { clear = true })
 --
 --     vim.api.nvim_create_autocmd("LspAttach", {
 --       group = lsp_attach_group,
@@ -114,14 +114,14 @@ return {
 --     })
 --
 --     -- local lsp_start = vim.api.nvim_create_augroup("lsp-start", { clear = true })
---     --
---     -- vim.api.nvim_create_autocmd("FileType", {
---     --   group = lsp_start,
---     --   callback = function()
---     --     vim.cmd("silent! lsp enable")
---     --   end,
---     -- })
---     -- require("mason-lspconfig").setup()
+--
+--     vim.api.nvim_create_autocmd("FileType", {
+--       group = lsp_start,
+--       callback = function()
+--         vim.cmd("silent! lsp enable")
+--       end,
+--     })
+--     require("mason-lspconfig").setup()
 --     -- vim.lsp.enable({ "lua_ls", "jdtls", "gopls", "zls" })
 --   end,
 -- }

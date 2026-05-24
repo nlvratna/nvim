@@ -2,5 +2,5 @@ return {
   name = "ols",
   cmd = { "ols" },
   filetypes = { "odin" },
-  root_dir = { "*.odin", "ols.json", ".git" },
+  root_dir = vim.fs.root(0, { "*.odin", "ols.json", ".git" }),
 }
