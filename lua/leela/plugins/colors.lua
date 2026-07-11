@@ -38,7 +38,7 @@ return {
           functions = {},
         },
         on_colors = function(c)
-          c.bg = "none"
+          c.bg = "#000000"
         end,
         on_highlights = function(hl, c)
           hl.TelescopeNormal = { bg = c.bg }
