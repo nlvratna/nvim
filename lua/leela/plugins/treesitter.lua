@@ -24,6 +24,8 @@ return {
         "luap",
         "markdown",
         "markdown_inline",
+        "nix",
+        "odin",
         "python",
         "regex",
         "tsx",

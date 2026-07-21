@@ -22,7 +22,7 @@ return {
           -- BlinkCmpDoc = { bg = "highlight_low" },
         },
       })
-      -- vim.cmd("colorscheme rose-pine")
+      vim.cmd("colorscheme rose-pine")
     end,
   },
 
@@ -46,7 +46,7 @@ return {
           hl.TelescopePromptBorder = { bg = c.bg }
         end,
       })
-      vim.cmd("colorscheme tokyonight")
+      -- vim.cmd("colorscheme tokyonight")
     end,
   },
 }
