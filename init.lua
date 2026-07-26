@@ -1,3 +1,5 @@
+-- https://github.com/mrnugget/vimconfig/blob/master/nvim/init.lua
+--https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
 vim.loader.enable()
 
 vim.g.mapleader = " "
@@ -361,15 +363,10 @@ require("conform").setup({
   },
 })
 
-require("fff").setup({})
-
-vim.keymap.set("n", "<leader>f", function()
-  require("fff").find_files()
-end, { desc = "FFFind files" })
-
-require("fff").setup({
+local fff = require("fff")
+fff.setup({
   prompt = "> ",
-  -- prompt_vim_mode = true,
+  prompt_vim_mode = true,
   hl = {
     normal = "FFFNormal",
     border = "FFFBorder",
@@ -379,5 +376,17 @@ require("fff").setup({
   layout = {
     prompt_position = "top",
   },
-  preview = { enabled = false },
+  -- preview = { enabled = false },
 })
+
+vim.keymap.set("n", "<leader>f", function()
+  require("fff").find_files()
+end, { desc = "FFFind files" })
+
+vim.keymap.set("n", "<leader>g", function()
+  fff.live_grep({ grep = { modes = { "fuzzy", "plain" } } })
+end)
+
+vim.keymap.set("n", "<leader>j", function()
+  fff.live_grep_under_cursor()
+end)
