@@ -69,6 +69,7 @@ local root_markers2 = {
   "pom.xml", -- Maven
   "build.gradle", -- Gradle
   "build.gradle.kts", -- Gradle
+  "mise.local.toml",
 }
 
 ---@type vim.lsp.Config

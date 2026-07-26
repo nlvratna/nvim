@@ -30,9 +30,9 @@ return {
     runtime = { version = "LuaJIT" },
     workspace = {
       checkThirdParty = true,
-      library = {
-        unpack(vim.api.nvim_get_runtime_file("", true)),
-      },
+  library = vim.tbl_filter(function(d) --https://github.com/neovim/nvim-lspconfig/issues/3189
+    return not d:match(vim.fn.stdpath('config') .. '/?a?f?t?e?r?')
+ end, vim.api.nvim_get_runtime_file('', true))
     },
     diagnostics = { disable = { "missing-fields" } },
     format = {
