@@ -1,7 +1,3 @@
--- require("leela.core")
--- require("leela.lazy")
--- require("vim._core.ui2").enable()
-
 vim.loader.enable()
 
 vim.g.mapleader = " "
@@ -35,6 +31,45 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+local opts = { noremap = true, silent = true }
+
+-- Disable the spacebar key's default behavior in Normal and Visual modes
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y', opts)
+vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p', opts)
+
+vim.keymap.set("v", "<leader>g", "$%", opts)
+
+-- Vertical scroll and center
+vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
+vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
+
+-- Find and center
+vim.keymap.set("n", "n", "nzzzv", opts)
+vim.keymap.set("n", "N", "Nzzzv", opts)
+
+-- Buffers
+vim.keymap.set("n", "<leader>d", ":bdelete!<CR>", opts)
+
+-- Stay in indent mode
+vim.keymap.set("v", "<", "<gv", opts)
+vim.keymap.set("v", ">", ">gv", opts)
+
+-- Keep last yanked when pasting
+vim.keymap.set("v", "p", '"_dP', opts)
+
+vim.keymap.set(
+  "n",
+  "<leader>v",
+  vim.diagnostic.open_float,
+  { desc = "Open floating diagnostic message", silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>t", vim.diagnostic.setqflist, opts)
+
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
@@ -50,35 +85,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<Esc>", ":q<CR>", { buffer = true, silent = true })
   end,
 })
--- vim.o.linebreak = true
--- vim.o.ignorecase = true
--- vim.o.smartcase = true
--- vim.o.shiftwidth = 4
--- vim.o.tabstop = 4
--- vim.o.softtabstop = 4
--- vim.o.expandtab = true
--- vim.o.scrolloff = 4
--- vim.o.sidescrolloff = 8
--- vim.o.cursorline = false
--- vim.o.splitbelow = true
--- vim.o.splitright = true
--- vim.o.hlsearch = false
--- vim.opt.termguicolors = true
--- vim.o.whichwrap = "bs<>[]hl"
--- vim.o.numberwidth = 2
--- vim.o.swapfile = false
--- vim.o.smartindent = true
--- vim.o.conceallevel = 0
--- vim.o.fileencoding = "utf-8"
--- vim.o.breakindent = true
--- vim.o.updatetime = 250
--- vim.o.timeoutlen = 300
--- vim.o.backup = false
--- vim.o.writebackup = false
--- vim.o.undofile = true
--- vim.o.completeopt = "menuone,noselect"
--- vim.opt.formatoptions:remove({ "c", "r", "o" })
---
+
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     local name = ev.data.spec.name
@@ -123,51 +130,17 @@ require("rose-pine").setup({
       base = "none",
     },
   },
+  highlight_groups = {
+    FFFNormal = { bg = "none", fg = "base" },
+    FFFBorder = { bg = "base" },
+    FFFCursor = { bg = "base" },
+  },
 })
 
 vim.cmd("colorscheme rose-pine")
 
 require("oil").setup()
 vim.keymap.set("n", "-", ":Oil<CR>")
-
-local opts = { noremap = true, silent = true }
-
--- Disable the spacebar key's default behavior in Normal and Visual modes
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
-vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y', opts)
-vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p', opts)
-
-vim.keymap.set("n", "<leader>g", "v$%", opts)
-
--- Vertical scroll and center
-vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
-vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
-
--- Find and center
-vim.keymap.set("n", "n", "nzzzv", opts)
-vim.keymap.set("n", "N", "Nzzzv", opts)
-
--- Buffers
-vim.keymap.set("n", "<leader>d", ":bdelete!<CR>", opts)
-
--- Stay in indent mode
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
-
--- Keep last yanked when pasting
-vim.keymap.set("v", "p", '"_dP', opts)
-
-vim.keymap.set(
-  "n",
-  "<leader>v",
-  vim.diagnostic.open_float,
-  { desc = "Open floating diagnostic message", silent = true, noremap = true }
-)
-vim.keymap.set("n", "<leader>t", vim.diagnostic.setqflist, opts)
 
 local treesitter_languages = {
   "c",
@@ -222,14 +195,14 @@ vim.diagnostic.config({
   float = { border = "rounded", source = "if_many" },
   -- float = false,
   underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = vim.g.have_nerd_font and {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "󰅚 ",
-      [vim.diagnostic.severity.WARN] = "󰀪 ",
-      [vim.diagnostic.severity.INFO] = "󰋽 ",
-      [vim.diagnostic.severity.HINT] = "󰌶 ",
-    },
-  } or {},
+  -- signs = vim.g.have_nerd_font and {
+  --   text = {
+  --     [vim.diagnostic.severity.ERROR] = "󰅚 ",
+  --     [vim.diagnostic.severity.WARN] = "󰀪 ",
+  --     [vim.diagnostic.severity.INFO] = "󰋽 ",
+  --     [vim.diagnostic.severity.HINT] = "󰌶 ",
+  --   },
+  -- } or {},
   virtual_text = false,
   update_in_insert = false,
   jump = {
@@ -275,7 +248,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("LspDetach", {
-  group = lsp_detach_group,
+  group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
   callback = function()
     vim.lsp.buf.clear_references()
   end,
@@ -388,6 +361,23 @@ require("conform").setup({
   },
 })
 
+require("fff").setup({})
+
 vim.keymap.set("n", "<leader>f", function()
   require("fff").find_files()
 end, { desc = "FFFind files" })
+
+require("fff").setup({
+  prompt = "> ",
+  -- prompt_vim_mode = true,
+  hl = {
+    normal = "FFFNormal",
+    border = "FFFBorder",
+    cursor = "FFFCursor",
+    winhl = "Normal:FFFNormal,FloatBorder:FFFBorder,FloatTitle:Title",
+  },
+  layout = {
+    prompt_position = "top",
+  },
+  preview = { enabled = false },
+})
