@@ -1,5 +1,9 @@
 -- https://github.com/mrnugget/vimconfig/blob/master/nvim/init.lua
 --https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
+-- require("vim._core.ui2").enable({
+--   enable = true,
+-- })
+
 vim.loader.enable()
 
 vim.g.mapleader = " "
@@ -16,7 +20,6 @@ vim.o.background = "dark"
 vim.o.showmode = true
 
 vim.o.undofile = true
-
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
@@ -92,34 +95,40 @@ vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     local name = ev.data.spec.name
     local kind = ev.data.kind
+    if kind ~= "install" and kind ~= "update" then
+      return
+    end
 
-    if name == "fff.nvim" and (kind == "install" or kind == "update") then
-      if not ev.data.active then
-        vim.cmd.packadd("fff.nvim")
-      end
-
-      require("fff.download").download_or_build_binary()
-    elseif name == "nvim-treesitter" and (kind == "install" or kind == "update") then
+    if name == "nvim-treesitter" then
       if not ev.data.active then
         vim.cmd.packadd("nvim-treesitter")
       end
-
-      vim.cmd.TSUpdate()
+      vim.cmd("TSUpdate")
+      return
     end
   end,
 })
 
 vim.pack.add({
   { src = "https://github.com/rose-pine/neovim", name = "rose-pine" },
-  { src = "https://github.com/dmtrKovalenko/fff.nvim", name = "fff.nvim" },
-  "https://github.com/stevearc/oil.nvim",
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/saghen/blink.lib",
   "https://github.com/saghen/blink.cmp",
   "https://github.com/numToStr/Comment.nvim",
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/folke/lazydev.nvim",
+  "https://github.com/ibhagwan/fzf-lua",
+  "https://github.com/vague-theme/vague.nvim",
+  -- "https://github.com/RRethy/base16-nvim",
 })
+
+require("vague").setup({
+  italic = false,
+  colors = {
+    bg = "none",
+  },
+})
+vim.cmd.colorscheme("vague")
 
 require("rose-pine").setup({
   variant = "main", -- auto, main, moon, or dawn
@@ -133,16 +142,23 @@ require("rose-pine").setup({
     },
   },
   highlight_groups = {
-    FFFNormal = { bg = "none", fg = "base" },
-    FFFBorder = { bg = "base" },
-    FFFCursor = { bg = "base" },
+    -- FzfLuaNormal = { bg = "base" },
+    -- FzfLuaFzfNormal = { bg = "base" },
+    -- FzfLuaBorder = { bg = "base", fg = "base" },
+    -- FzfLuaBackdrop = { bg = "base" },
+    -- FFFNormal = { bg = "none", fg = "base" },
+    -- FFFBorder = { bg = "base" },
+    -- FFFCursor = { bg = "base" },
+    -- TelescopeNormal = { bg = "base", fg = "base" },
+    -- TelescopeResultsNormal = { bg = "base", fg = "base" },
+    -- TelescopePromptsNormal = { bg = "base" },
+    -- TelescopeBorder = { bg = "base" },
   },
 })
 
-vim.cmd("colorscheme rose-pine")
+-- vim.cmd("colorscheme rose-pine")
 
-require("oil").setup()
-vim.keymap.set("n", "-", ":Oil<CR>")
+vim.keymap.set("n", "-", vim.cmd.Ex, opts)
 
 local treesitter_languages = {
   "c",
@@ -323,15 +339,15 @@ cmp.setup({
   },
 })
 
-vim.keymap.set("n", "<C-_>", require("Comment.api").toggle.linewise.current, opts)
-vim.keymap.set("n", "<C-/>", require("Comment.api").toggle.linewise.current, opts)
+local comment = require("Comment.api")
+vim.keymap.set("n", "<C-_>", comment.toggle.linewise.current, opts)
+vim.keymap.set("n", "<C-/>", comment.toggle.linewise.current, opts)
 vim.keymap.set(
   "v",
   "<C-_>",
   "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
   opts
 )
-
 vim.keymap.set(
   "v",
   "<C-/>",
@@ -363,30 +379,23 @@ require("conform").setup({
   },
 })
 
-local fff = require("fff")
-fff.setup({
-  prompt = "> ",
-  prompt_vim_mode = true,
-  hl = {
-    normal = "FFFNormal",
-    border = "FFFBorder",
-    cursor = "FFFCursor",
-    winhl = "Normal:FFFNormal,FloatBorder:FFFBorder,FloatTitle:Title",
-  },
-  layout = {
-    prompt_position = "top",
-  },
-  -- preview = { enabled = false },
-})
-
+-- require("fzf-lua").setup({ "telescope" })
 vim.keymap.set("n", "<leader>f", function()
-  require("fff").find_files()
-end, { desc = "FFFind files" })
+  require("fzf-lua").files()
+end)
 
 vim.keymap.set("n", "<leader>g", function()
-  fff.live_grep({ grep = { modes = { "fuzzy", "plain" } } })
+  require("fzf-lua").grep()
 end)
 
 vim.keymap.set("n", "<leader>j", function()
-  fff.live_grep_under_cursor()
+  require("fzf-lua").live_grep()
+end)
+
+vim.keymap.set("n", "<leader>k", function()
+  require("fzf-lua").lsp_workspace_symbols()
+end)
+
+vim.keymap.set("n", "<leader>l", function()
+  require("fzf-lua").grep_cWORD()
 end)
