@@ -13,6 +13,7 @@ vim.g.have_nerd_font = true
 vim.opt.guicursor = ""
 vim.cmd.syntax("enable")
 
+vim.opt.mouse = ""
 vim.wo.number = true
 vim.o.relativenumber = true
 vim.o.autoread = true
@@ -39,62 +40,62 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- https://github.com/smnatale/nvim_native/blob/main/lua/netrw.lua
-vim.g.netrw_liststyle = 3 -- tree view
-vim.g.netrw_banner = 0 -- hide the top banner
-vim.g.netrw_winsize = 25 -- fix the left split width
-vim.g.netrw_browse_split = 0 -- open files in the previous window
-vim.g.netrw_altfile = 1 -- keep the alternate file correct
+-- -- https://github.com/smnatale/nvim_native/blob/main/lua/netrw.lua
+-- vim.g.netrw_liststyle = 3 -- tree view
+-- vim.g.netrw_banner = 0 -- hide the top banner
+-- vim.g.netrw_winsize = 25 -- fix the left split width
+-- vim.g.netrw_browse_split = 0 -- open files in the previous window
+-- vim.g.netrw_altfile = 1 -- keep the alternate file correct
 
-vim.keymap.set("n", "<leader>e", ":Lex<CR>")
+vim.keymap.set("n", "-", ":Ex<CR>")
 
--- netrw's built-in `%` opens new files in the netrw window instead of
--- respecting `netrw_browse_split`. Override it to open in the previous window.
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "netrw",
-  callback = function()
-    vim.keymap.set("n", "%", function()
-      local fname = vim.fn.input("Enter filename: ")
-      if fname == "" then
-        return
-      end
-
-      local dir = vim.b.netrw_curdir or vim.fn.getcwd()
-      local path = dir .. "/" .. fname
-
-      if vim.fn.filereadable(path) == 1 or vim.fn.isdirectory(path) == 1 then
-        vim.notify("Already exists: " .. fname, vim.log.levels.WARN)
-        return
-      end
-
-      if fname:match("/$") then
-        vim.fn.mkdir(path, "p")
-        vim.cmd("edit")
-      else
-        local f = io.open(path, "w")
-        if not f then
-          vim.notify("Failed to create: " .. fname, vim.log.levels.ERROR)
-          return
-        end
-        f:close()
-
-        local escaped = vim.fn.fnameescape(path)
-        if vim.fn.winnr("#") == 0 then
-          vim.cmd("edit " .. escaped)
-        else
-          vim.cmd("wincmd p")
-          vim.cmd("edit " .. escaped)
-        end
-      end
-    end, {
-      buffer = true,
-      silent = true,
-      noremap = true,
-      desc = "Create file in previous window",
-    })
-  end,
-})
-
+-- -- netrw's built-in `%` opens new files in the netrw window instead of
+-- -- respecting `netrw_browse_split`. Override it to open in the previous window.
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "netrw",
+--   callback = function()
+--     vim.keymap.set("n", "%", function()
+--       local fname = vim.fn.input("Enter filename: ")
+--       if fname == "" then
+--         return
+--       end
+--
+--       local dir = vim.b.netrw_curdir or vim.fn.getcwd()
+--       local path = dir .. "/" .. fname
+--
+--       if vim.fn.filereadable(path) == 1 or vim.fn.isdirectory(path) == 1 then
+--         vim.notify("Already exists: " .. fname, vim.log.levels.WARN)
+--         return
+--       end
+--
+--       if fname:match("/$") then
+--         vim.fn.mkdir(path, "p")
+--         vim.cmd("edit")
+--       else
+--         local f = io.open(path, "w")
+--         if not f then
+--           vim.notify("Failed to create: " .. fname, vim.log.levels.ERROR)
+--           return
+--         end
+--         f:close()
+--
+--         local escaped = vim.fn.fnameescape(path)
+--         if vim.fn.winnr("#") == 0 then
+--           vim.cmd("edit " .. escaped)
+--         else
+--           vim.cmd("wincmd p")
+--           vim.cmd("edit " .. escaped)
+--         end
+--       end
+--     end, {
+--       buffer = true,
+--       silent = true,
+--       noremap = true,
+--       desc = "Create file in previous window",
+--     })
+--   end,
+-- })
+--
 local opts = { noremap = true, silent = true }
 
 -- Disable the spacebar key's default behavior in Normal and Visual modes
@@ -173,7 +174,6 @@ vim.pack.add({
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/saghen/blink.lib",
   "https://github.com/saghen/blink.cmp",
-  "https://github.com/numToStr/Comment.nvim",
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/folke/lazydev.nvim",
   "https://github.com/ibhagwan/fzf-lua",
@@ -314,7 +314,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
     map("gr", vim.lsp.buf.references, "Show References")
-    map("sd", vim.lsp.buf.document_symbol, "")
+    -- map("sd", vim.lsp.buf.document_symbol, "")
     map("<leader>o", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
     map("<C-l>", vim.lsp.buf.signature_help, "show help", "i")
   end,
@@ -394,21 +394,11 @@ cmp.setup({
   },
 })
 
-local comment = require("Comment.api")
-vim.keymap.set("n", "<C-_>", comment.toggle.linewise.current, opts)
-vim.keymap.set("n", "<C-/>", comment.toggle.linewise.current, opts)
-vim.keymap.set(
-  "v",
-  "<C-_>",
-  "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-  opts
-)
-vim.keymap.set(
-  "v",
-  "<C-/>",
-  "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-  opts
-)
+vim.keymap.set("n", "<C-_>", "gcc", { remap = true })
+vim.keymap.set("v", "<C-_>", "gc", { remap = true })
+
+vim.keymap.set("n", "<C-/>", "gcc", { remap = true })
+vim.keymap.set("v", "<C-/>", "gc", { remap = true })
 
 require("conform").setup({
   formatters_by_ft = {
